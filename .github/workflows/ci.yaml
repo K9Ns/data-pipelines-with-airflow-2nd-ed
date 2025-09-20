@@ -71,7 +71,7 @@ jobs:
           # - chapter08
           - chapter09
           # - chapter10
-          - chapter11/docker
+          # - chapter11/docker # No docker available
           - chapter11/kubernetes
           - chapter12
           - chapter13
