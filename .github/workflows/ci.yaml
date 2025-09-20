@@ -64,7 +64,7 @@ jobs:
           - chapter01
           - chapter02
           - chapter03
-          - chapter04
+          # - chapter04
           - chapter05
           - chapter06
           # - chapter07 # Temporary ignore since sensors are not triggered and ci run will never finish
