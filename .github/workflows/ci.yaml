@@ -75,13 +75,13 @@ jobs:
           - chapter11/kubernetes
           - chapter12
           - chapter13
-          - chapter14
-          # - chapter15
-          - chapter16/01-rbac
+          # - chapter14 # No env file available with full settings
+          # - chapter15 # Dags contain failures on purpose
+          # - chapter16/01-rbac # No default user airflow available
           - chapter16/02-webserver-theme
           - chapter16/03-ldap
           - chapter16/04-ssl
-          - chapter16/05-secretsbackend
+          # - chapter16/05-secretsbackend # No default value for secure_api connection
           # - chapter17
     #     airflow_version: ["3.0.6"]
     # env:

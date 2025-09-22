@@ -40,7 +40,8 @@ def _fetch_pageviews(pagenames, logical_date):
 
 with DAG(
     dag_id="09_postgres_call",
-    start_date=pendulum.today("UTC").add(hours=-3),
+    start_date=pendulum.now("UTC").add(hours=-4),
+    end_date=pendulum.now("UTC").add(hours=-1),
     schedule=CronTriggerTimetable("@hourly", timezone="UTC"),
     template_searchpath="/tmp",
     max_active_runs=1,
