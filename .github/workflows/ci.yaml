@@ -72,7 +72,7 @@ jobs:
           - chapter09
           # - chapter10
           # - chapter11/docker # No docker available
-          - chapter11/kubernetes
+          # - chapter11/kubernetes # Pre setup steps needed
           - chapter12
           - chapter13
           # - chapter14 # No env file available with full settings
