@@ -43,18 +43,6 @@ To enable validating all dags of all chapters in a CI setting the script `valida
 ```bash
 ./validate-dag-runs.sh -c chapter01
 ./validate-dag-runs.sh -c chapter02
-./validate-dag-runs.sh -c chapter11/docker
+etc.
 ```
 
-#### TODO
-
-- Add config file to enable validating dags that are expected to fail
-- Add config file to be able to ignore dag directories (like chapter10/tests/dags)
-- Add ways to check dag state for dags that have multiple runs (chapter11/docker has 3 runs for example. The current sript only checks if 1 of them succeeded.)
-
-- Add script to update airflow version in envs, dockerfiles etc
-```bash
-sed -i -e 's/\"3\.0\.5rc2\"/\"3.0.6\"/g' chapter17/values/*.yaml
-sed -i -e 's/apache\/airflow:3\.0\.5rc2/apache\/airflow:3.0.6/g' chapter*/.env
-sed -i -e 's/apache\/airflow:3\.0\.5rc2/apache\/airflow:3.0.6/g' chapter*/Dockerfile.*
-```
