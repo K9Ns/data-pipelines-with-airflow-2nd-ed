@@ -11,7 +11,7 @@ images:
     pullPolicy: Always
 
 # 3 - Using the external database
-postgres:
+postgresql:
   enabled: false
 
 data:

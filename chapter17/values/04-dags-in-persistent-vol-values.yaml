@@ -10,7 +10,7 @@ dags:
     existingClaim: local-path-dag-volume-claim
 
 # 3 - Using the external database
-postgres:
+postgresql:
   enabled: false
 
 data:

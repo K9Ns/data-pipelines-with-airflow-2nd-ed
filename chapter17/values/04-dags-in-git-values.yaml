@@ -26,7 +26,7 @@ dags:
     subPath: "chapter02/dags"
 
 # 3 - Using the external database
-postgres:
+postgresql:
   enabled: false
 
 data:
