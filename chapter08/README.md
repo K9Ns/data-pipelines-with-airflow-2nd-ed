@@ -11,7 +11,7 @@ This code example contains the following DAGs:
 
 ## Preparation
 
-For the 01_aws_hadwritten_digits_classifier the following needs to be prepared:
+For the 01_aws_handwritten_digits_classifier the following needs to be prepared:
 
 - Get a AWS ACCES KEY and a AWS SECRET and make sure these are available in the shell where the code is executed
 - Create A Sagemaker Execution Role see: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html. The ARN needs to be made available to the shell.
