@@ -15,17 +15,14 @@ docker compose up -d
 With this command you can add a user from the commandline
 
 ```
-docker compose run airflow-cli bash
-```
-
-```
-airflow users create \
+docker compose run --remove-orphans airflow-cli bash -c "airflow users create \
   --role Admin \
   --username bobsmith \
   --password topsecret \
   --email bobsmith@company.com \
   --firstname Bob \
-  --lastname Smith
+  --lastname Smith"
 ```
+
 
 Login in [Airflow UI](localhost:8080) username/password `bobsmith`/`topsecret`.
