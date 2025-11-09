@@ -3,6 +3,12 @@
 defaultAirflowTag: "3.1.2"
 airflowVersion: "3.1.2"
 
+# override bitnami image in subchart
+postgresql:
+  image:
+    repository: postgres
+    tag: "16"
+
 # 1 - Overriding the default user
 webserver:
   # Create initial user.
