@@ -1,7 +1,13 @@
 # Override default values in the Apache Airflow Helm Chart
 #
-defaultAirflowTag: "3.0.3"
-airflowVersion: "3.0.3"
+defaultAirflowTag: "3.1.2"
+airflowVersion: "3.1.2"
+
+# override bitnami image in subchart
+postgresql:
+  image:
+    repository: postgres
+    tag: "16"
 
 # 1 - Overriding the default user
 webserver:

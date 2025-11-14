@@ -1,10 +1,10 @@
 # Override default values in the Apache Airflow Helm Chart
 #
-defaultAirflowTag: "3.0.3"
-airflowVersion: "3.0.3"
+defaultAirflowTag: "3.1.2"
+airflowVersion: "3.1.2"
 
 # 3 - Using the external database
-postgres:
+postgresql:
   enabled: false
 
 data:

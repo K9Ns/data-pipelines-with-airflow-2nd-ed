@@ -30,7 +30,7 @@ Inside the k3s-cli container we can deploy airflow with the following commands:
 
 ```bash
 helm repo add apache-airflow https://airflow.apache.org
-helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace --set apiServer.service.type=LoadBalancer
+helm upgrade --install airflow apache-airflow/airflow --namespace airflow --create-namespace --set apiServer.service.type=LoadBalancer --set postgresql.image.repository=postgres --set postgresql.image.tag=16
 ```
 
 to verify the running services/pods we can check with the following command:

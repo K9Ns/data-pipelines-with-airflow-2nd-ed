@@ -6,7 +6,7 @@ from airflow.timetables.interval import CronDataIntervalTimetable
 from custom.postgres_to_s3_operator import PostgresToS3Operator
 
 with DAG(
-    dag_id="chapter7_insideairbnb",
+    dag_id="chapter8_insideairbnb",
     start_date=datetime(2025, 3, 1),
     end_date=datetime(2025, 4, 1),
     schedule=CronDataIntervalTimetable("@monthly", "UTC"),

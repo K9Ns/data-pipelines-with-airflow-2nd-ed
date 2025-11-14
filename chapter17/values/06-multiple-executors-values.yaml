@@ -1,7 +1,7 @@
 # Override default values in the Apache Airflow Helm Chart
 #
-defaultAirflowTag: "3.0.3"
-airflowVersion: "3.0.3"
+defaultAirflowTag: "3.1.2"
+airflowVersion: "3.1.2"
 
 # 6 - Multiple executors
 executor: "CeleryExecutor,KubernetesExecutor"
@@ -25,7 +25,7 @@ images:
     pullPolicy: Always
 
 # 3 - Using the external database
-postgres:
+postgresql:
   enabled: false
 
 data:

@@ -10,7 +10,7 @@ from custom.postgres_to_s3_operator import PostgresToS3Operator
 from minio import Minio
 
 with DAG(
-    dag_id="chapter7_insideairbnb_python",
+    dag_id="chapter8_insideairbnb_python",
     start_date=datetime(2025, 3, 1),
     end_date=datetime(2025, 4, 1),
     schedule=CronDataIntervalTimetable("@monthly", "UTC"),

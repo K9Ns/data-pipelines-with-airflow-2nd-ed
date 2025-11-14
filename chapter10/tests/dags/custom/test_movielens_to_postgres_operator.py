@@ -58,18 +58,15 @@ def test_movielens_to_postgres_operator(mocker, postgres, test_dag):
         postgres_conn_id="postgres",
         insert_query=(
             "INSERT INTO movielens (movieId,rating,ratingTimestamp,userId,scrapeTime) "
-            "VALUES ({0}, '{{ macros.datetime.now() }}')"
+            "VALUES ({0}, '2025-06-10 12:00:00')"
+            # "VALUES ({0}, '{{ datetime.now() }}')"
         ),
         dag=test_dag,
     )
     pg_hook = PostgresHook()
     row_count = pg_hook.get_first("SELECT COUNT(*) FROM movielens")[0]
     assert row_count == 0
-
-    task.run(
-        start_date=test_dag.default_args["start_date"],
-        end_date=test_dag.default_args["start_date"],
-    )
+    task.execute(context=None)
 
     row_count = pg_hook.get_first("SELECT COUNT(*) FROM movielens")[0]
     assert row_count > 0

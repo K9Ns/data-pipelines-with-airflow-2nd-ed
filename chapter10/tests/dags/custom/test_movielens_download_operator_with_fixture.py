@@ -28,7 +28,4 @@ def test_movielens_operator(tmp_path, mocker, test_dag):
         dag=test_dag,
     )
 
-    task.run(
-        start_date=test_dag.default_args["start_date"],
-        end_date=test_dag.default_args["start_date"],
-    )
+    task.execute(context=None)

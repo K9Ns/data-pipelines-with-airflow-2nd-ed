@@ -2,7 +2,7 @@ import datetime
 
 from airflow.models import DAG
 
-from chapter09.dags.custom.movielens_to_postgres_operator import MovielensToPostgresOperator
+from chapter10.dags.custom.movielens_to_postgres_operator import MovielensToPostgresOperator
 
 dagtestdag = DAG(
     "dagtestdag",
