@@ -1,4 +1,4 @@
-# 3장
+# chapter03 (번역서 3장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 3장의 예제 코드입니다.
 

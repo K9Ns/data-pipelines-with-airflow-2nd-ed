@@ -1,4 +1,4 @@
-# 1장
+# chapter01 (번역서 1장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 1장의 예제 코드입니다.
 
