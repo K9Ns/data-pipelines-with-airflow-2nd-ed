@@ -48,7 +48,7 @@ if upload & (recipe_name != "") & (ingredients != "") & (instructions != ""):
 
     fs, base_path = fsspec.core.url_to_fs(dest_path)
 
-    #upload json data to s3
+    # JSON 데이터를 S3에 업로드
     with fs.open(f"{base_path}/recipe_name.json", "w") as f:
         json.dumps(json_data)
 

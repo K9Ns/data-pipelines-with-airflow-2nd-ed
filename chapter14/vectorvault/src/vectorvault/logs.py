@@ -35,7 +35,7 @@ def log_dataframe(log:Logger, df:pd.DataFrame, df_name:str) -> None:
 
 
 def custom_df_log(df, log:Logger) -> None:
-    # Create a list to hold formatted column names
+    # 형식을 맞춘 열 이름을 담을 리스트 생성
     formatted_columns = []
     
     for col in df.columns:
@@ -43,10 +43,10 @@ def custom_df_log(df, log:Logger) -> None:
         formatted_col = (col[:12] + '...') if len(col) > 15 else col
         formatted_columns.append(formatted_col.ljust(15))  # Ensure 15 char space
 
-    # Print the formatted column names with 2 spaces between them
+    # 열 이름을 2칸 간격으로 출력
     log.warning('  '.join(formatted_columns))
 
-    # Iterate over each row in the DataFrame
+    # DataFrame의 각 행을 순회
     for index, row in df.iterrows():
         formatted_values = []
         for col in df.columns:
@@ -60,5 +60,5 @@ def custom_df_log(df, log:Logger) -> None:
                 formatted_value = str(value)
             formatted_values.append(formatted_value.ljust(15))  # Ensure 15 char space
 
-        # Print the formatted row values with 2 spaces between them
+        # 행 값을 2칸 간격으로 출력
         log.warning('  '.join(formatted_values))

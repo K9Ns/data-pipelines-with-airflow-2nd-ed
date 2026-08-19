@@ -43,27 +43,27 @@ weaviate_db = WeaviateVectorStore(
 combine_docs_chain = create_stuff_documents_chain(openai_client, PROMPT)
 rag_chain = create_retrieval_chain(weaviate_db.as_retriever(), combine_docs_chain)
 
-# Initialize chat history
+# 채팅 이력 초기화
 if "messages" not in st.session_state:
     st.session_state.messages = []
     st.session_state.context_documents = []
 
-# Display chat messages from history on app rerun
+# 앱 재실행 시 이력의 채팅 메시지 표시
 for message in st.session_state.messages:
     with col1.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Accept user input
+# 사용자 입력 받기
 if question := st.chat_input("What is up?"):
 
     col2.empty()
-    # Add user message to chat history
+    # 사용자 메시지를 채팅 이력에 추가
     st.session_state.messages.append({"role": "user", "content": question})
-    # Display user message in chat message container
+    # 사용자 메시지를 채팅 메시지 컨테이너에 표시
     with col1.chat_message("user"):
         st.markdown(question)
 
-    # Display assistant response in chat message container
+    # 어시스턴트 응답을 채팅 메시지 컨테이너에 표시
     with col1.chat_message("assistant"):
         
         output = rag_chain.invoke({
