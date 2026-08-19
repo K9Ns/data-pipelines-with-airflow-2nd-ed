@@ -1,37 +1,34 @@
-# Chapter 15
+# chapter15 (번역서 14장)
 
-Code accompanying Chapter 15 of the book [Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow).
+『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 14장의 예제 코드입니다.
 
-## Contents
+## 구성
 
-This folder contains DAGs from Chapter 15. Topics covered are monitoring, logging, scaling horizontal, etc. An
-accompanying Docker Compose setup was built for demonstration purposes. This includes:
+이 폴더에는 모니터링, 로깅, 수평 확장 등을 다루는 DAG가 들어 있습니다. 시연용 Docker Compose 구성이 딸려 있고, 다음을 포함합니다.
 
-- Airflow (webserver, scheduler, and Celery workers)
-- PostgreSQL database for Airflow metastore
-- Redis for Celery queue
-- Flower, a Celery monitoring tool
-- Prometheus, for scraping and storing metrics
-- Grafana, for visualizing metrics
-- And a Redis & StatsD exporter to expose metrics
+- Airflow (웹 UI, 스케줄러, Celery 워커)
+- Airflow 메타스토어용 PostgreSQL 데이터베이스
+- Celery 큐용 Redis
+- Celery 모니터링 도구 Flower
+- 메트릭 스크레이프·저장용 Prometheus
+- 메트릭 시각화용 Grafana
+- 메트릭 노출용 Redis·StatsD 익스포터
 
-Given the number of services, this can become a bit resource-heavy on your machine.
+서비스 수가 많아 머신 자원을 꽤 잡아먹을 수 있습니다.
 
-Unfortunately, not everything can be scripted/pre-initialized, especially in Grafana. Therefore, you must add
-Prometheus as a datasource and create a dashboard yourself.
+아쉽게도 모든 것을 스크립트로 미리 초기화할 수는 없습니다. 특히 Grafana가 그렇습니다. Prometheus를 데이터 소스로 추가하고 대시보드를 만드는 일은 직접 해야 합니다.
 
-## Usage
+## 사용법
 
-To get started with the code examples, start Airflow with Docker Compose with the following command:
+다음 명령으로 Docker Compose에서 Airflow를 시작합니다.
 
 ```bash
 docker compose up -d
 ```
 
-The webserver initializes a few things, so wait for a few seconds, and you should be able to access the
-Airflow webserver at http://localhost:8080.
+초기화에 몇 초 걸리니 잠시 기다리면 http://localhost:8080 에서 Airflow 웹 UI에 접근할 수 있습니다.
 
-To stop running the examples, run the following command:
+예제 실행을 멈추려면 다음 명령을 실행합니다.
 
 ```bash
 docker compose down -v
