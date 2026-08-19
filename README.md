@@ -27,7 +27,9 @@ Manning 도서 [Data Pipelines with Apache Airflow, Second Edition](https://www.
 └── README.md                # 장 특화 안내 (있는 경우)
 ```
 
-> **장 번호 매핑 주의.** 이 저장소의 chapter 디렉터리 번호는 원서 최종판 기준이라, 번역 원고(MEAP v15, 1~14장+부록 A)의 장 번호와 어긋나는 구간이 있습니다. 예를 들어 원고 13장(생성형 AI 프로젝트)의 코드는 `chapter14/`에 있습니다. 각 장 디렉터리의 README와 DAG 파일명으로 대조하세요.
+> **장 번호 매핑 주의.** 이 저장소의 chapter 디렉터리 번호는 원서 최종판 기준이라, 번역 원고(MEAP v15, 1~14장+부록 A)의 장 번호와 어긋나는 구간이 있습니다. 예를 들어 원고 13장(생성형 AI 프로젝트)의 코드는 `chapter14/`에 있습니다. 각 장 README의 제목에 대응하는 번역서 장 번호를 적어 두었습니다.
+
+한국어판 독자를 위해 예제 코드의 주석·독스트링·DAG 설명 문자열과 장별 README를 한국어로 옮겼습니다. 코드 동작은 원본과 같고, 라이선스 문구와 상류 공용 파일(`official-airflow-docker-compose.yml`, `webserver_config.py` 템플릿)은 원문을 유지합니다.
 
 ## 사용법
 
