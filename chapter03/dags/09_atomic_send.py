@@ -9,7 +9,7 @@ from pendulum import datetime
 
 
 def _calculate_stats(input_path, output_path):
-    """Calculates event statistics."""
+    """이벤트 통계를 계산한다."""
     events = pd.read_json(input_path, convert_dates=["timestamp"])
 
     stats = (
@@ -21,7 +21,7 @@ def _calculate_stats(input_path, output_path):
 
 
 def email_stats(stats, email):
-    """Send an email..."""
+    """이메일을 보낸다..."""
     print(f"Sending stats to {email}...{stats}")
 
 

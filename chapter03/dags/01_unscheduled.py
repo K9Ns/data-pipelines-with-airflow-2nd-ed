@@ -7,7 +7,7 @@ from airflow.sdk import DAG
 
 
 def _calculate_stats(input_path, output_path):
-    """Calculates event statistics."""
+    """이벤트 통계를 계산한다."""
 
     events = pd.read_json(input_path, convert_dates=["timestamp"])
 
