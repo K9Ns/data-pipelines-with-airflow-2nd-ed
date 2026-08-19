@@ -91,7 +91,7 @@ with DAG(
         return pd.concat(dfs)
 
     def transform_citi_bike_data(df):
-        # Map citi bike lat,lon coordinates to taxi zone ids
+        # Citi Bike 위도/경도 좌표를 택시 존 id로 매핑
         taxi_zones = geopandas.read_file("https://d37ci6vzurychx.cloudfront.net/misc/taxi_zones.zip").to_crs(
             "EPSG:4326"
         )

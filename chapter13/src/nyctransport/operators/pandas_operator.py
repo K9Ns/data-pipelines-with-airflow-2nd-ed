@@ -23,15 +23,15 @@ class PandasOperator(BaseOperator):
     ):
         super().__init__(**kwargs)
 
-        # Attributes for reading data
+        # 데이터 읽기 관련 속성
         self._input_callable = input_callable
         self._input_callable_kwargs = input_callable_kwargs or {}
 
-        # Attributes for transformations
+        # 변환 관련 속성
         self._transform_callable = transform_callable
         self._transform_callable_kwargs = transform_callable_kwargs or {}
 
-        # Attributes for writing data
+        # 데이터 쓰기 관련 속성
         self._output_callable = output_callable
         self._output_callable_kwargs = output_callable_kwargs or {}
 

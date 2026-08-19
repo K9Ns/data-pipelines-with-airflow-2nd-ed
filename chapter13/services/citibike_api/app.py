@@ -30,9 +30,9 @@ def index():
 @auth.login_required
 def get_recent_rides(period: str, amount: int):
     """
-    Return
-    :param period: either "minute", "hour", or "day"
-    :param amount: (optional) the number of periods
+    최근 운행 기록을 반환한다.
+    :param period: "minute", "hour", "day" 중 하나
+    :param amount: (선택) 기간 수
     :return:
     """
     if period not in ("minute", "hour", "day"):

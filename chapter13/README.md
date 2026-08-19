@@ -1,46 +1,41 @@
-# Chapter 13
+# chapter13 (번역서 12장)
 
-Code accompanying Chapter 13 of the book [Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow).
+『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 12장의 예제 코드입니다.
 
-Much of this use case was based on the ideas in https://toddwschneider.com/posts/taxi-vs-citi-bike-nyc, where
-the fastest method of transportation (Citi Bikes or Yellow Taxis) between two NYC neighborhoods at given times
-and days is determines. We will productionize this use case into an Airflow workflow. Two (mocked) real-time
-services are created for this purpose:
+이 사용 사례의 상당 부분은 https://toddwschneider.com/posts/taxi-vs-citi-bike-nyc 의 아이디어에 기반합니다. 주어진 시간대와 요일에 NYC의 두 동네 사이에서 가장 빠른 교통수단(Citi Bike 대 옐로 택시)이 무엇인지 판정하는 문제입니다. 이 사용 사례를 Airflow 워크플로로 프로덕션화합니다. 이를 위해 (모의) 실시간 서비스 둘을 만듭니다.
 
-1. A service providing Citi Bike rides
-1. A service providing NYC Yellow Taxi rides
+1. Citi Bike 운행 기록을 제공하는 서비스
+1. NYC 옐로 택시 운행 기록을 제공하는 서비스
 
-An Airflow DAG will periodically scrape these services, wrangle the data, and send the results into a Postgres database serving a tiny website, displaying which transportation method is fastest between two NYC neighborhoods.
+Airflow DAG가 이 서비스들을 주기적으로 긁어 데이터를 다듬고, 결과를 Postgres 데이터베이스로 보냅니다. 이 데이터베이스는 두 NYC 동네 사이에서 어떤 교통수단이 가장 빠른지 보여 주는 작은 웹사이트를 받칩니다.
 
-The real data is only available in batches of months/years. Therefore we provide two APIs to mimic "live"
-systems. The system can be brought online with the `compose.yaml` provided with this repository:
+실제 데이터는 월/년 단위 배치로만 제공됩니다. 그래서 "실시간" 시스템을 흉내 내는 API 둘을 마련했습니다. 이 저장소에 딸린 `compose.yaml`로 시스템을 띄울 수 있습니다.
 
 ```bash
 docker compose up -d --build
 ```
 
-If all processing goes well, the final result is visible on http://localhost:8083.
+처리가 잘 끝나면 최종 결과를 http://localhost:8083 에서 볼 수 있습니다.
 
-Ports on which services are available:
+서비스가 열리는 포트는 다음과 같습니다.
 
 - http://localhost:5432: Airflow Postgres DB (`airflow`/`airflow`)
-- http://localhost:5433: NYC Taxi Postgres DB (`taxi`/`ridetlc`)
+- http://localhost:5433: NYC 택시 Postgres DB (`taxi`/`ridetlc`)
 - http://localhost:5434: Citi Bike Postgres DB (`citi`/`cycling`)
-- http://localhost:5435: NYC Transportation results Postgres DB (`nyc`/`tr4N5p0RT4TI0N`)
-- http://localhost:8080: Airflow webserver (`airflow`/`airflow`)
-- http://localhost:8081: NYC Taxi static file server
+- http://localhost:5435: NYC 교통 결과 Postgres DB (`nyc`/`tr4N5p0RT4TI0N`)
+- http://localhost:8080: Airflow 웹 UI (`airflow`/`airflow`)
+- http://localhost:8081: NYC 택시 정적 파일 서버
 - http://localhost:8082: Citi Bike API (`citibike`/`cycling`)
-- http://localhost:8083: NYC Transportation API
+- http://localhost:8083: NYC 교통 API
 - http://localhost:9000: MinIO (`AKIAIOSFODNN7EXAMPLE`/`wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY`)
 
-## More information
+## 더 알아보기
 
-### Taxi dataset
+### 택시 데이터 세트
 
-The taxi dataset refers to the "NYC Taxi and Limousine Commission (TLC) Trip Record Data", available here:
-https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page.
+택시 데이터 세트는 "NYC Taxi and Limousine Commission (TLC) Trip Record Data"를 가리키며, https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page 에서 받을 수 있습니다.
 
-A snippet of the data:
+데이터 일부는 다음과 같습니다.
 
 ```csv
 VendorID,tpep_pickup_datetime,tpep_dropoff_datetime,passenger_count,trip_distance,RatecodeID,store_and_fwd_flag,PULocationID,DOLocationID,payment_type,fare_amount,extra,mta_tax,tip_amount,tolls_amount,improvement_surcharge,total_amount,congestion_surcharge
@@ -55,13 +50,13 @@ VendorID,tpep_pickup_datetime,tpep_dropoff_datetime,passenger_count,trip_distanc
 1,2019-01-01 00:32:01,2019-01-01 00:45:39,1,3.70,1,N,229,7,1,13.5,0.5,0.5,3.7,0,0.3,18.5,
 ```
 
-Data dictionary: https://www1.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
+데이터 사전: https://www1.nyc.gov/assets/tlc/downloads/pdf/data_dictionary_trip_records_yellow.pdf
 
-### Citi Bike dataset
+### Citi Bike 데이터 세트
 
 https://www.citibikenyc.com/system-data
 
-A snippet of the data:
+데이터 일부는 다음과 같습니다.
 
 ```csv
 "tripduration","starttime","stoptime","start station id","start station name","start station latitude","start station longitude","end station id","end station name","end station latitude","end station longitude","bikeid","usertype","birth year","gender"

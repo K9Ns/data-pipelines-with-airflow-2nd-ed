@@ -342,7 +342,7 @@ order by start_location_id, end_location_id, weekday, time_group;"""
     )
     data = cursor.fetchall()
 
-    # Replace location ids with names
+    # 위치 id를 이름으로 바꾼다
     for i, row in enumerate(data):
         listrow = list(row)
         listrow[0] = taxi_zones.get(listrow[0], "Unknown zone name")
