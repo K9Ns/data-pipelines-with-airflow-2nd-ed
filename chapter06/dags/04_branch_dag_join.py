@@ -1,6 +1,6 @@
 """
-Listing: 5.15
-Figure: 5.10
+리스트: 5.15
+그림: 5.10
 """
 
 import pendulum

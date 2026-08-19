@@ -1,6 +1,6 @@
 """
-Listing: 5.3, 5.4, 5.5, 5.6
-Figure: 5.3
+리스트: 5.3, 5.4, 5.5, 5.6
+그림: 5.3
 """
 
 
@@ -37,7 +37,7 @@ def _is_latest_run(dag, data_interval_start, data_interval_end):
                 restriction=time_restriction,
             )
     if next_info is None:
-        # Last scheduled execution
+        # 마지막 스케줄된 실행
         return True
 
     next_info_start, next_info_end = next_info.data_interval

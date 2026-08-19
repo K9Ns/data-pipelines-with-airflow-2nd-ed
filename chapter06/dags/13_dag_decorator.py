@@ -1,6 +1,6 @@
 """
-Listing: 5.29
-Figure: 5.19
+리스트: 5.29
+그림: 5.19
 """
 
 import uuid

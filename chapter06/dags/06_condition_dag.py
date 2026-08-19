@@ -1,6 +1,6 @@
 """
-Listing: 5.17, 5.18
-Figure: 5.12, 5.13
+리스트: 5.17, 5.18
+그림: 5.12, 5.13
 """
 
 
@@ -33,7 +33,7 @@ def _latest_only(dag, data_interval_start, data_interval_end, **_):
                 restriction=time_restriction,
             )
     if next_info is None:
-        # Last scheduled execution
+        # 마지막 스케줄된 실행
         return True
 
     next_info_start, next_info_end = next_info.data_interval

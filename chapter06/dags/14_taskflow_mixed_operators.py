@@ -1,6 +1,6 @@
 
 """
-Listing: 5.30
+리스트: 5.30
 """
 
 import uuid
