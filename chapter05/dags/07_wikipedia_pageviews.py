@@ -24,7 +24,7 @@ def _fetch_pageviews(pagenames, logical_date, **_):
                 result[page_title] = view_counts
 
     print(result)
-    # Prints e.g. "{'Facebook': '778', 'Apple': '20', 'Google': '451', 'Amazon': '9', 'Microsoft': '119'}"
+    # 출력 예: "{'Facebook': '778', 'Apple': '20', 'Google': '451', 'Amazon': '9', 'Microsoft': '119'}"
 
 
 with DAG(

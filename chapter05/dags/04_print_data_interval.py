@@ -8,7 +8,7 @@ def _print_context(**context):
     start = context["data_interval_start"]
     end = context["data_interval_end"]
     print(f"Start: {start}, end: {end}")
-    # Prints e.g.:
+    # 출력 예:
     # Start: 2024-07-13T14:00:00+00:00, end: 2024-07-13T15:00:00+00:00
 
 

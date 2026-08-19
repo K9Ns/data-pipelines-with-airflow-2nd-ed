@@ -1,5 +1,5 @@
 # """
-# Documentation of pageview format: https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews
+# 페이지뷰 형식 문서: https://wikitech.wikimedia.org/wiki/Analytics/Data_Lake/Traffic/Pageviews
 # """
 
 from urllib import request
