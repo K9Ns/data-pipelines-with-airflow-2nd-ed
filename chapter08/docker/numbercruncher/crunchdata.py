@@ -10,7 +10,7 @@ S3_SECRET_KEY = os.environ["S3_SECRET_KEY"]
 
 client = Minio(S3_ENDPOINT, access_key=S3_ACCESS_KEY, secret_key=S3_SECRET_KEY, secure=False)
 
-# Get list of all objects
+# 전체 객체 목록 가져오기
 objects = [obj.object_name for obj in client.list_objects(bucket_name="inside-airbnb", prefix="listing")]
 df = pd.DataFrame()
 for obj in objects:
@@ -22,8 +22,8 @@ for obj in objects:
     )
     df = df.append(temp_df)
 
-# Per id, get the price increase/decrease
-# There's probably a nicer way to do this
+# id별 가격 상승/하락 계산
+# 더 깔끔한 방법이 있을 법하다
 min_max_per_id = (
     df.groupby(["id"])
     .agg(
@@ -63,7 +63,7 @@ df_with_max[["price_diff_per_day"]] = df_with_max[["price_diff_per_day"]].apply(
 biggest_increase = df_with_max.nlargest(5, "price_diff_per_day")
 biggest_decrease = df_with_max.nsmallest(5, "price_diff_per_day")
 
-# We found the top 5, write back the results.
+# 상위 5개를 찾았으니 결과를 되써 넣는다.
 biggest_increase_json = biggest_increase.to_json(orient="records")
 print(f"Biggest increases: {biggest_increase_json}")
 biggest_increase_bytes = biggest_increase_json.encode("utf-8")

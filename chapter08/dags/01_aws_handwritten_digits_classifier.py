@@ -22,7 +22,7 @@ SAGEMAKER_ROLE=os.environ.get("SAGEMAKER_EXEC_ROLE_ARN")
 
 
 def _add_bucket_policy():
-    # Create a bucket policy
+    # 버킷 정책 생성
     bucket_policy = {
         "Version": "2012-10-17",
         "Id": "ExamplePolicy01",
@@ -42,10 +42,10 @@ def _add_bucket_policy():
         ]
     }
 
-    # Convert the policy from JSON dict to string
+    # 정책을 JSON 딕셔너리에서 문자열로 변환
     bucket_policy = json.dumps(bucket_policy)
 
-    # Set the new policy
+    # 새 정책 설정
     s3hook = S3Hook()
     session = s3hook.get_session(region_name=REGION_NAME)
     s3_client = session.client("s3")
@@ -53,7 +53,7 @@ def _add_bucket_policy():
 
 def _extract_mnist_data():                          #B
     s3hook = S3Hook()                               #C
-    # Download S3 dataset into memory
+    # S3 데이터 세트를 메모리로 다운로드
     mnist_buffer = io.BytesIO()
     mnist_obj = s3hook.get_key(                     #D
         bucket_name=BUCKET_NAME,
@@ -61,7 +61,7 @@ def _extract_mnist_data():                          #B
     )
 
     mnist_obj.download_fileobj(mnist_buffer)
-    # Unpack gzip file, extract dataset, convert, upload back to S3
+    # gzip 파일을 풀어 데이터 세트를 추출·변환하고 S3에 다시 업로드
     mnist_buffer.seek(0)
 
     with gzip.GzipFile(fileobj=mnist_buffer, mode="rb") as f:
