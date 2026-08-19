@@ -1,18 +1,18 @@
-# RBAC demo
+# RBAC 데모
 
-This docker compose file demonstrates the Airflow RBAC interface.
+Airflow RBAC 인터페이스를 시연하는 docker compose 파일입니다.
 
-This is mainly based on the standard compose file.
+표준 compose 파일을 거의 그대로 사용합니다.
 
-## Usage
+## 사용법
 
 ```
 docker compose up -d
 ```
 
-### Create first user
+### 첫 사용자 만들기
 
-With this command you can add a user from the commandline
+다음 명령으로 명령줄에서 사용자를 추가할 수 있습니다.
 
 ```
 docker compose run --remove-orphans airflow-cli bash -c "airflow users create \
@@ -24,5 +24,4 @@ docker compose run --remove-orphans airflow-cli bash -c "airflow users create \
   --lastname Smith"
 ```
 
-
-Login in [Airflow UI](localhost:8080) username/password `bobsmith`/`topsecret`.
+[Airflow UI](localhost:8080)에 사용자명/비밀번호 `bobsmith`/`topsecret` 으로 로그인합니다.

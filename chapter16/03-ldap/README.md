@@ -1,25 +1,26 @@
 # LDAP
 
-Demonstrate RBAC UI + LDAP authentication using OpenLDAP.
+OpenLDAP을 사용한 RBAC UI + LDAP 인증을 시연합니다.
 
-## Usage
+## 사용법
 
 ```
 docker compose up -d
 ```
 
-Login in Airflow with username `bsmith` and password `test`.
+Airflow에 사용자명 `bsmith`, 비밀번호 `test` 로 로그인합니다.
 
-## Details
+## 세부 사항
 
-OpenLDAP is bootstrapped with:
+OpenLDAP은 다음이 미리 준비된 채 시작됩니다.
 
-- An admin user (DN=`cn=admin,dc=apacheairflow,dc=com`, password=`admin`)
-- A readonly user (DN=`cn=readonly,dc=apacheairflow,dc=com`, password=`readonly`)
-- A group named "engineers" (DN=`cn=engineers,dc=apacheairflow,dc=com`)
-- A user in this group (DN=`cn=bob smith,dc=apacheairflow,dc=com`, password=`test`)
+- 관리자 사용자 (DN=`cn=admin,dc=apacheairflow,dc=com`, 비밀번호=`admin`)
+- 읽기 전용 사용자 (DN=`cn=readonly,dc=apacheairflow,dc=com`, 비밀번호=`readonly`)
+- "engineers" 그룹 (DN=`cn=engineers,dc=apacheairflow,dc=com`)
+- 이 그룹에 속한 사용자 (DN=`cn=bob smith,dc=apacheairflow,dc=com`, 비밀번호=`test`)
 
-Exposed ports on host:
+호스트에 노출되는 포트는 다음과 같습니다.
+
 - 5432: PostgreSQL (user=airflow, pass=airflow)
 - 8080: Airflow UI
 - 8081: phpLDAPadmin (OpenLDAP UI)

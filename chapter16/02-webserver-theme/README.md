@@ -1,19 +1,20 @@
-# Webserver theme demo
+# 웹서버 테마 데모
 
-This docker-compose file demonstrates settings a webserver theme in `webserver_config.py`.
+`webserver_config.py`로 웹서버 테마를 설정하는 것을 시연하는 docker-compose 파일입니다.
 
-## Usage
+## 사용법
 
 ```
 docker compose up -d
 ```
 
-Wait 5 seconds or so for the webserver to come up.
+웹서버가 뜰 때까지 5초쯤 기다립니다.
 
-Login in Airflow username/password `airflow`/`airflow`.
+Airflow에 사용자명/비밀번호 `airflow`/`airflow` 로 로그인합니다.
 
-## Details
+## 세부 사항
 
-Exposed ports on host:
+호스트에 노출되는 포트는 다음과 같습니다.
+
 - 5432: PostgreSQL (user=`airflow`, pass=`airflow`)
-- 8080: Airflow webserver
+- 8080: Airflow 웹서버

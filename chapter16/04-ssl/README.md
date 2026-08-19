@@ -1,6 +1,6 @@
-# SSL config
+# SSL 구성
 
-## Generate SSL certificate
+## SSL 인증서 생성
 
 ```bash
 openssl req \
@@ -21,10 +21,10 @@ openssl req \
 -subj "/CN=localhost"
 ```
 
-## Usage
+## 사용법
 
 ```
 docker compose up -d
 ```
 
-Log in to the secure website https://localhost:8080
+보안 웹사이트 https://localhost:8080 에 로그인합니다.
