@@ -1,5 +1,5 @@
 """
-    Listing: 6.2
+    리스트: 6.2
 """
 
 
@@ -23,7 +23,7 @@ with DAG(
     dag_id="04_PythonSensor_example",
     start_date=pendulum.today("UTC").add(days=-3),
     schedule=CronTriggerTimetable("0 16 * * *", timezone="UTC"),
-    description="A batch workflow for ingesting supermarket promotions data.",
+    description="슈퍼마켓 프로모션 데이터를 수집하는 배치 워크플로.",
     default_args={"depends_on_past": True},
 ):
     wait_for_supermarket_1 = PythonSensor(

@@ -1,5 +1,5 @@
 """
-    Figure: 6.7, 6.8
+    그림: 6.7, 6.8
 """
 
 import pendulum
@@ -13,7 +13,7 @@ with DAG(
     dag_id="06_Sensor_deadlock",
     start_date=pendulum.today("UTC").add(days=-14),
     schedule=CronTriggerTimetable("0 16 * * *", timezone="UTC"),
-    description="Create a file /data/supermarket1/data.csv, and behold a sensor deadlock.",
+    description="/data/supermarket1/data.csv 파일을 만들고 센서 데드록을 지켜보세요.",
     catchup=True
 ):
     create_metrics = EmptyOperator(task_id="create_metrics")

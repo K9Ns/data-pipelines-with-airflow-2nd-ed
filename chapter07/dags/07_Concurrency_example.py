@@ -1,5 +1,5 @@
 """
-    Listing: 6.3
+    리스트: 6.3
 """
 
 import pendulum

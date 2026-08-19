@@ -1,5 +1,5 @@
 """
-    Figure: 6.9, 6.10
+    그림: 6.9, 6.10
 """
 
 
@@ -23,7 +23,7 @@ with DAG(
     dag_id="08_reschedule_mode_example",
     start_date=pendulum.today("UTC").add(days=-14),
     schedule=CronTriggerTimetable("0 16 * * *", timezone="UTC"),
-    description="A batch workflow for ingesting supermarket promotions data, demonstrating the PythonSensor.",
+    description="슈퍼마켓 프로모션 데이터를 수집하는 배치 워크플로. PythonSensor를 시연합니다.",
     catchup=True
 ):
     create_metrics = EmptyOperator(task_id="create_metrics")

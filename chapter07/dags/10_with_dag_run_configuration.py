@@ -1,5 +1,5 @@
 """
-    Listing: 6.10, 6.11
+    리스트: 6.10, 6.11
 """
 
 
@@ -12,7 +12,7 @@ with DAG(
     dag_id="10_with_dag_run_configuration",
     start_date=pendulum.today("UTC").add(days=-3),
     schedule=CronTriggerTimetable("0 16 * * *", timezone="UTC"),
-    description="A batch workflow for ingesting supermarket promotions data, demonstrating the PythonSensor.",
+    description="슈퍼마켓 프로모션 데이터를 수집하는 배치 워크플로. PythonSensor를 시연합니다.",
     default_args={"depends_on_past": True},
 ):
     copy = EmptyOperator(task_id="copy_to_raw")

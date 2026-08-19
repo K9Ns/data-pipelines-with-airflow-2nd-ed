@@ -1,5 +1,5 @@
 """
-    Figure: 6.5
+    그림: 6.5
 """
 
 from airflow.sdk import DAG, AssetWatcher, Asset
@@ -17,7 +17,7 @@ asset = Asset("kafka_queue_asset", watchers=[AssetWatcher(name="kafka_watcher", 
 with DAG(
         dag_id="12_kafka_trigger",
         schedule=[asset],
-        description="A batch workflow for ingesting supermarket promotions data, demonstrating the Message Queue Trigger.",
+        description="슈퍼마켓 프로모션 데이터를 수집하는 배치 워크플로. 메시지 큐 트리거를 시연합니다.",
 ):
     create_metrics = EmptyOperator(task_id="create_metrics")
 
