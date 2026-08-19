@@ -5,7 +5,7 @@ from airflow.timetables.trigger import CronTriggerTimetable
 
 @task
 def fetch_ratings():
-    "Retrieve the latest ratings from the movie reviews API. The number of reviews varies per request"
+    "영화 리뷰 API에서 최신 평점을 가져온다. 리뷰 수는 요청마다 다르다"
     data = requests.get("http://movie-reviews-api:8081/reviews/latest")
     return data.json()
 

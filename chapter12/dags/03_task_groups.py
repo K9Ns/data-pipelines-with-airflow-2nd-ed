@@ -31,7 +31,7 @@ def generate_tasks(dataset_name, raw_dir, processed_dir, preprocess_script, outp
 
     fetch_task >> preprocess_task >> export_task
 
-    # Return first and last task
+    # 첫 태스크와 마지막 태스크 반환
     return fetch_task, export_task
 
 
