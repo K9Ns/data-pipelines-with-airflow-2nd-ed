@@ -10,10 +10,10 @@ from requests.exceptions import ConnectionError, MissingSchema
 
 
 def _get_pictures():
-    # Ensure directory exists
+    # 디렉터리가 있는지 확인
     pathlib.Path("/tmp/images").mkdir(parents=True, exist_ok=True)
 
-    # Download all pictures in launches.json
+    # launches.json에 있는 모든 사진 다운로드
     with open("/tmp/launches.json") as f:
         launches = json.load(f)
         image_urls = [launch["image"] for launch in launches["results"]]

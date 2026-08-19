@@ -10,10 +10,10 @@ from requests.exceptions import ConnectionError, MissingSchema
 
 
 def _get_pictures():
-    # Ensure directory exists
+    # 디렉터리가 있는지 확인
     pathlib.Path("/tmp/images").mkdir(parents=True, exist_ok=True)
 
-    # Download all pictures in launches.json
+    # launches.json에 있는 모든 사진 다운로드
     with open("/tmp/launches.json") as f:
         launches = json.load(f)
         image_urls = [launch["image"] for launch in launches["results"]]
@@ -32,7 +32,7 @@ def _get_pictures():
 
 with DAG(
     dag_id="05_download_rocket_launches",
-    description="Download rocket pictures of recently launched rockets.",
+    description="최근 발사된 로켓의 사진을 다운로드합니다.",
     start_date=pendulum.today("UTC").add(days=-14),
     schedule="@daily",
     catchup=True,
