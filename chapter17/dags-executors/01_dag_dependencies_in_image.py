@@ -1,4 +1,4 @@
-"""DAG demonstrating the umbrella use case with empty operators."""
+"""EmptyOperator로 우산 사용 사례를 시연하는 DAG."""
 
 import pendulum
 from airflow.exceptions import AirflowException
@@ -26,7 +26,7 @@ def _tf_version_old():
 
 with DAG(
     dag_id="01_dag_dependencies_in_image_multiple_executors",
-    description="Dag dependencies in custom image example.",
+    description="커스텀 이미지에 DAG 의존성을 넣는 예제.",
     start_date=pendulum.today("UTC").add(days=-5),
     schedule=CronTriggerTimetable("@daily", timezone="UTC"),
 ):
@@ -83,5 +83,5 @@ with DAG(
     )
     finish = EmptyOperator(task_id="finish", trigger_rule="one_success")
 
-    # Set dependencies between all tasks
+    # 모든 태스크 사이의 의존성 설정
     some_init_task >> [ version_fail, version_k8s, version_k8s_old ] >> finish
