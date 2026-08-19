@@ -48,6 +48,12 @@ AIRFLOW_IMAGE_NAME=apache/airflow:3.3.1 docker compose up --build
 
 일부 뒷장 예제는 추가 설정이 필요합니다. 해당 장의 README와 책 본문을 참고하세요.
 
+> **Windows 주의.** 각 장의 `compose.yaml`은 루트 `official-airflow-docker-compose.yml`을 가리키는 심링크입니다. Windows 기본 설정에서는 심링크가 텍스트 파일로 체크아웃되므로, 개발자 모드를 켜고 `git clone -c core.symlinks=true`로 받거나 루트 compose 파일을 장 디렉터리로 복사해 사용하세요.
+
+## Airflow 3.3.1 검증
+
+검증 시점(2026-08-20)의 최신 안정 버전인 Airflow 3.3.1에서 전 장의 DAG 임포트, chapter10 pytest, chapter01 통합 실행을 확인했습니다. 3.3.1 비호환으로 확인된 예제는 없으며, 세부 결과와 재현 방법은 [docs/airflow-3.3.1-verification.md](docs/airflow-3.3.1-verification.md)에 있습니다.
+
 ## DAG 실행 검증 (CI)
 
 모든 장의 DAG를 실행해 검증하는 스크립트가 있습니다.
