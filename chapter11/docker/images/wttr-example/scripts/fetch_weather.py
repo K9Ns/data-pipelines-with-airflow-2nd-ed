@@ -10,10 +10,10 @@ import requests
     "--output_path",
     default=None,
     type=click.Path(dir_okay=False, writable=True),
-    help="Optional file to write output to.",
+    help="출력을 기록할 파일(선택).",
 )
 def fetch_weather(city, output_path):
-    """CLI application for fetching weather forecasts from wttr.in."""
+    """wttr.in에서 일기 예보를 가져오는 CLI 애플리케이션."""
 
     response = requests.get(f"https://v2.wttr.in/{city}")
     response.raise_for_status()

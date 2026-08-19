@@ -1,37 +1,37 @@
-# Chapter 11 - Docker
+# chapter11 - Docker (번역서 10장)
 
-Code accompanying the Docker part of Chapter 11 from the book 'Data pipelines with Apache Airflow'.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 10장의 Docker 부분 예제 코드입니다.
 
-## Contents
+## 구성
 
-This code example starts with an example of a Docker image using the wttr API. You can find this example image under `images/wttr-example`.
+이 예제는 wttr API를 사용하는 Docker 이미지 예제로 시작합니다. 예제 이미지는 `images/wttr-example` 아래에 있습니다.
 
-Besides this, we also include an example DAG that demonstrates a recommender system based on the movielens dataset using Docker.
+그 밖에 movielens 데이터 세트 기반 추천 시스템을 Docker로 시연하는 예제 DAG도 들어 있습니다.
 
-## Usage
+## 사용법
 
-### wttr image
+### wttr 이미지
 
-You can run the wttr example using:
+wttr 예제는 다음처럼 실행할 수 있습니다.
 
 ```
 docker build -t manning-airflow/wttr-example images/wttr-example
 docker run manning-airflow/wttr-example Amsterdam
 ```
 
-This should kick off the process of building the wttr image and running a container using this image.
+wttr 이미지를 빌드하고 그 이미지로 컨테이너를 실행하는 과정이 시작됩니다.
 
 ### Docker DAG
 
-You can run the example DAG using docker-compose:
+예제 DAG는 docker-compose로 실행할 수 있습니다.
 
 ```
 docker compose up -d --build
 ```
 
-Wait for a few seconds and you should be able to access the examples at http://localhost:8080/.
+몇 초 기다리면 http://localhost:8080/ 에서 예제에 접근할 수 있습니다.
 
-To stop running the examples, run the following command:
+예제 실행을 멈추려면 다음 명령을 실행합니다.
 
 ```
 docker compose down -v

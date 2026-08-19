@@ -8,7 +8,7 @@ from docker.types import Mount
 
 with DAG(
     dag_id="01_docker",
-    description="Fetches ratings from the Movielens API using Docker.",
+    description="Docker로 Movielens API에서 평점을 가져옵니다.",
     start_date=datetime(2023, 1, 1),
     end_date=datetime(2023, 1, 3),
     schedule=CronDataIntervalTimetable("@daily", "UTC"),
@@ -33,7 +33,7 @@ with DAG(
             os.environ["MOVIELENS_HOST"],
         ],
         network_mode="docker_default",
-        # Note: this host path is on the HOST, not in the Airflow docker container.
+        # 참고: 이 경로는 호스트 쪽 경로다. Airflow docker 컨테이너 안 경로가 아니다.
         mounts=[Mount(source="docker_airflow-data-volume", target="/data", type="volume")],
         mount_tmp_dir=False,
     )

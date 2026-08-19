@@ -15,19 +15,19 @@ logging.basicConfig(level=logging.INFO)
     "--start_date",
     type=click.DateTime(formats=["%Y-%m-%d"]),
     required=True,
-    help="Start date for ratings.",
+    help="평점 시작 날짜.",
 )
 @click.option(
     "--end_date",
     type=click.DateTime(formats=["%Y-%m-%d"]),
     required=True,
-    help="End date for ratings.",
+    help="평점 종료 날짜.",
 )
 @click.option(
     "--output_path",
     type=click.Path(dir_okay=False),
     required=True,
-    help="Output file path.",
+    help="출력 파일 경로.",
 )
 @click.option("--host", type=str, default="http://movielens:5000", help="Movielens API URL.")
 @click.option(
@@ -35,24 +35,24 @@ logging.basicConfig(level=logging.INFO)
     type=str,
     envvar="MOVIELENS_USER",
     required=True,
-    help="Movielens API user.",
+    help="Movielens API 사용자.",
 )
 @click.option(
     "--password",
     type=str,
     envvar="MOVIELENS_PASSWORD",
     required=True,
-    help="Movielens API password.",
+    help="Movielens API 비밀번호.",
 )
-@click.option("--batch_size", type=int, default=100, help="Batch size for retrieving records.")
+@click.option("--batch_size", type=int, default=100, help="레코드 조회 배치 크기.")
 def main(start_date, end_date, output_path, host, user, password, batch_size):
-    """CLI script for fetching movie ratings from the movielens API."""
+    """movielens API에서 영화 평점을 가져오는 CLI 스크립트."""
 
-    # Setup session.
+    # 세션 준비.
     session = requests.Session()
     session.auth = (user, password)
 
-    # Fetch ratings.
+    # 평점 가져오기.
     logging.info("Fetching ratings from %s (user: %s)", host, user)
 
     ratings = list(
@@ -66,7 +66,7 @@ def main(start_date, end_date, output_path, host, user, password, batch_size):
     )
     logging.info("Retrieved %d ratings!", len(ratings))
 
-    # Write output.
+    # 출력 쓰기.
     output_path = Path(output_path)
 
     output_dir = output_path.parent
@@ -91,8 +91,8 @@ def _get_ratings(session, host, start_date, end_date, batch_size=100):
 
 def _get_with_pagination(session, url, params, batch_size=100):
     """
-    Fetches records using a get request with given url/params,
-    taking pagination into account.
+    주어진 url/params로 get 요청을 보내 레코드를 가져온다.
+    페이지네이션을 고려한다.
     """
 
     offset = 0
