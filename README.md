@@ -52,7 +52,7 @@ AIRFLOW_IMAGE_NAME=apache/airflow:3.3.1 docker compose up --build
 
 ## Airflow 3.3.1 검증
 
-검증 시점(2026-08-20)의 최신 안정 버전인 Airflow 3.3.1에서 전 장의 DAG 임포트, chapter10 pytest, chapter01 통합 실행, 그리고 독립적인 2차 정적 검토(제거 API·템플릿 변수·구성 키)를 확인했습니다. 3.3.1 비호환으로 확인된 예제는 없으며, 세부 결과와 재현 방법은 [docs/airflow-3.3.1-verification.md](docs/airflow-3.3.1-verification.md)에 있습니다.
+검증 시점(2026-08-20)의 최신 안정 버전인 Airflow 3.3.1을 기준으로 전 장의 DAG 임포트 검사, chapter10 pytest, chapter01 통합 실행을 확인하고, 제거 API·템플릿 변수·구성 키를 훑는 정적 검토를 한 차례 더 거쳤습니다. 호환되지 않는 예제는 발견되지 않았습니다. 세부 결과와 재현 방법은 [docs/airflow-3.3.1-verification.md](docs/airflow-3.3.1-verification.md)를 참고하세요.
 
 ## DAG 실행 검증 (CI)
 
