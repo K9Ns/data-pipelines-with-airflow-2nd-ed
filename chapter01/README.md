@@ -1,24 +1,24 @@
-# Chapter 1
+# 1장
 
-Code accompanying Chapter 1 of the book 'Data pipelines with Apache Airflow'.
+『Data Pipelines with Apache Airflow, Second Edition』 1장의 예제 코드입니다.
 
-## Contents
+## 구성
 
-This code example contains the following DAGs:
+이 예제에는 다음 DAG가 들어 있습니다.
 
-- 01_umbrella_predictions.py - DAG illustrating the Umbrella use case.
+- `01_umbrella.py`: 우산 사용 사례를 보여 주는 DAG.
 
-## Usage
+## 사용법
 
-To get started with the code examples, start Airflow in docker using the following command:
+다음 명령으로 Docker에서 Airflow를 시작합니다.
 
 ```
 docker compose up -d
 ```
 
-Wait for a few seconds and you should be able to access the examples at http://localhost:8080/.
+몇 초 기다리면 http://localhost:8080/ 에서 예제에 접근할 수 있습니다.
 
-To stop running the examples, run the following command:
+예제 실행을 멈추려면 다음 명령을 실행합니다.
 
 ```
 docker compose down -v
