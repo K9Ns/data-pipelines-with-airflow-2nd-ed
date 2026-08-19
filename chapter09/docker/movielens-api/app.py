@@ -49,18 +49,18 @@ def hello():
 @auth.login_required
 def ratings():
     """
-    Returns ratings from the movielens dataset.
+    movielens 데이터 세트의 평점을 반환한다.
 
     Parameters
     ----------
     start_date : str
-        Start date to query from (inclusive).
+        조회 시작 날짜(포함).
     end_date : str
-        End date to query upto (exclusive).
+        조회 종료 날짜(제외).
     offset : int
-        Offset to start returning data from (used for pagination).
+        데이터 반환을 시작할 오프셋(페이지네이션용).
     limit : int
-        Maximum number of records to return (used for pagination).
+        반환할 최대 레코드 수(페이지네이션용).
     """
 
     start_date_ts = _date_to_timestamp(request.args.get("start_date", None))

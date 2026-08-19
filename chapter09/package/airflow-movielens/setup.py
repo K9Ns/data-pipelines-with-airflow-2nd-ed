@@ -9,7 +9,7 @@ extra_requirements = {"dev": ["pytest"]}
 setuptools.setup(
     name="airflow_movielens",
     version="0.1.0",
-    description="Hooks, sensors and operators for the Movielens API.",
+    description="Movielens API용 훅, 센서, 오퍼레이터.",
     author="Anonymous",
     author_email="anonymous@example.com",
     install_requires=requirements,

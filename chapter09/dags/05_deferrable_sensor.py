@@ -7,7 +7,7 @@ from custom.triggers import MovielensSensorAsync
 
 with DAG(
     dag_id="05_deferrable_sensor",
-    description="Fetches ratings from the Movielens API, with a deferrable custom sensor.",
+    description="지연 가능 커스텀 센서와 함께 Movielens API에서 평점을 가져옵니다.",
     start_date=datetime(2023, 1, 1),
     end_date=datetime(2023, 1, 10),
     schedule=CronDataIntervalTimetable("@daily", "UTC"),

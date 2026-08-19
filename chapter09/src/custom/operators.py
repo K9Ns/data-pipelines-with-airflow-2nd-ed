@@ -9,25 +9,24 @@ from custom.hooks import MovielensHook
 
 class MovielensFetchRatingsOperator(BaseOperator):
     """
-    Operator that fetches ratings from the Movielens API (introduced in Chapter 8).
+    Movielens API에서 평점을 가져오는 오퍼레이터(8장에서 소개).
 
     Parameters
     ----------
     conn_id : str
-        ID of the connection to use to connect to the Movielens API. Connection
-        is expected to include authentication details (login/password) and the
-        host that is serving the API.
+        Movielens API에 연결할 때 사용할 연결의 ID. 연결에는 인증 정보
+        (login/password)와 API를 제공하는 호스트가 들어 있어야 한다.
     output_path : str
-        Path to write the fetched ratings to.
+        가져온 평점을 기록할 경로.
     start_date : str
-        (Templated) start date to start fetching ratings from (inclusive).
-        Expected format is YYYY-MM-DD (equal to Airflow's ds formats).
+        (템플릿 지원) 평점을 가져오기 시작할 시작 날짜(포함).
+        기대 형식은 YYYY-MM-DD(Airflow의 ds 형식과 동일).
     end_date : str
-        (Templated) end date to fetching ratings up to (exclusive).
-        Expected format is YYYY-MM-DD (equal to Airflow's ds formats).
+        (템플릿 지원) 평점을 가져올 종료 날짜(제외).
+        기대 형식은 YYYY-MM-DD(Airflow의 ds 형식과 동일).
     batch_size : int
-        Size of the batches (pages) to fetch from the API. Larger values
-        mean less requests, but more data transferred per request.
+        API에서 가져올 배치(페이지) 크기. 값이 클수록 요청 수는 줄지만
+        요청당 전송되는 데이터는 많아진다.
     """
 
     template_fields = ("_start_date", "_end_date", "_output_path")
@@ -64,15 +63,15 @@ class MovielensFetchRatingsOperator(BaseOperator):
             )
             self.log.info(f"Fetched {len(ratings)} ratings")
         finally:
-            # Make sure we always close our hook's session.
+            # 훅의 세션을 항상 닫도록 보장한다.
             hook.close()
 
         self.log.info(f"Writing ratings to {self._output_path}")
 
-        # Make sure output directory exists.
+        # 출력 디렉터리가 있는지 확인한다.
         output_dir = os.path.dirname(self._output_path)
         os.makedirs(output_dir, exist_ok=True)
 
-        # Write output as JSON.
+        # 출력을 JSON으로 쓴다.
         with open(self._output_path, "w") as file_:
             json.dump(ratings, fp=file_)

@@ -1,52 +1,52 @@
-# Chapter 9
+# chapter09 (번역서 8장)
 
-Code accompanying Chapter 9 of the book 'Data pipelines with Apache Airflow'.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 8장의 예제 코드입니다.
 
-## Contents
+## 구성
 
-This code example contains the following DAGs:
+이 예제에는 다음 DAG가 들어 있습니다.
 
-- 01_python.py - Our initial DAG in which we illustrate the use case using the built-in PythonOperator.
-- 02_hook.py - Adjusted version of the former DAG, in which we use a custom Airflow hook for connecting to the Movie API.
-- 03_operator.py - Another version of the same DAG, using a custom operator class instead of the builtin PythonOperator.
-- 04_sensor.py - Final version of the DAG, in which we also demonstrate how to build a custom sensor class.
+- `01_python.py`: 내장 PythonOperator로 사용 사례를 구현한 초기 DAG.
+- `02_hook.py`: 앞 DAG를 손봐 영화 API 연결에 커스텀 Airflow 훅을 쓰는 버전.
+- `03_operator.py`: 내장 PythonOperator 대신 커스텀 오퍼레이터 클래스를 쓰는 버전.
+- `04_sensor.py`: 커스텀 센서 클래스 작성까지 시연하는 최종 버전.
 
-Besides this, the example also contains the following files:
+그 밖에 다음 파일들이 있습니다.
 
 ```
-├── api                         <- Docker image for the movie API.
-├── dags                        <- Folder containing our DAGs.
-│   ├── custom                  <- Custom hooks, etc. used in the DAGs.
+├── api                         <- 영화 API의 Docker 이미지.
+├── dags                        <- DAG를 담은 폴더.
+│   ├── custom                  <- DAG에서 쓰는 커스텀 훅 등.
 │   │   ├── __init__.py
 │   │   ├── hooks.py
 │   │   ├── operators.py
 │   │   ├── ranking.py
 │   │   └── sensors.py
-│   └── *.py                    <- The DAGs mentioned above.
+│   └── *.py                    <- 위에서 말한 DAG들.
 ├── docker-compose.yml
 ├── src
-│   └── airflow-movielens       <- Same code as the 'custom' directory,
-│       ├── setup.py               built as a proper Python package.
+│   └── airflow-movielens       <- 'custom' 디렉터리와 같은 코드를
+│       ├── setup.py               제대로 된 파이썬 패키지로 만든 것.
 │       └── src
 │           └── airflow_movielens
 │               ├── __init__.py
 │               ├── hooks.py
 │               ├── operators.py
 │               └── sensors.py
-└── readme.md                   <- This file.
+└── readme.md                   <- 이 파일.
 ```
 
-## Usage
+## 사용법
 
-To get started with the code examples, start Airflow in docker using the following command:
+다음 명령으로 Docker에서 Airflow를 시작합니다.
 
 ```bash
 docker compose up -d --build
 ```
 
-Wait for a few seconds and you should be able to access the examples at http://localhost:8080/.
+몇 초 기다리면 http://localhost:8080/ 에서 예제에 접근할 수 있습니다.
 
-To stop running the examples, run the following command:
+예제 실행을 멈추려면 다음 명령을 실행합니다.
 
 ```bash
 docker compose down -v

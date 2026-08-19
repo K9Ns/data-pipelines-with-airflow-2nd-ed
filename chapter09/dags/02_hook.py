@@ -10,7 +10,7 @@ from custom.hooks import MovielensHook
 
 with DAG(
     dag_id="02_hook",
-    description="Fetches ratings from the Movielens API using a custom hook.",
+    description="커스텀 훅으로 Movielens API에서 평점을 가져옵니다.",
     start_date=datetime(2023, 1, 1),
     end_date=datetime(2023, 1, 10),
     schedule=CronDataIntervalTimetable("@daily", "UTC"),
@@ -31,7 +31,7 @@ with DAG(
 
         logger.info(f"Writing ratings to {output_path}")
 
-        # Make sure output directory exists.
+        # 출력 디렉터리가 있는지 확인한다.
         output_dir = os.path.dirname(output_path)
         os.makedirs(output_dir, exist_ok=True)
 

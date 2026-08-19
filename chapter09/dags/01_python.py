@@ -32,13 +32,13 @@ def _get_ratings(start_date, end_date, batch_size=100):
 
 
 def _get_session():
-    """Builds a requests Session for the Movielens API."""
+    """Movielens API용 requests 세션을 만든다."""
 
-    # Setup our requests session.
+    # requests 세션을 준비한다.
     session = requests.Session()
     session.auth = (MOVIELENS_USER, MOVIELENS_PASSWORD)
 
-    # Define API base url from connection details.
+    # 연결 정보로 API 기본 URL을 구성한다.
     schema = MOVIELENS_SCHEMA
     host = MOVIELENS_HOST
     port = MOVIELENS_PORT
@@ -50,8 +50,8 @@ def _get_session():
 
 def _get_with_pagination(session, url, params, batch_size=100):
     """
-    Fetches records using a get request with given url/params,
-    taking pagination into account.
+    주어진 url/params로 get 요청을 보내 레코드를 가져온다.
+    페이지네이션을 고려한다.
     """
 
     offset = 0
@@ -69,7 +69,7 @@ def _get_with_pagination(session, url, params, batch_size=100):
 
 with DAG(
     dag_id="01_python",
-    description="Fetches ratings from the Movielens API using the Python Operator.",
+    description="PythonOperator로 Movielens API에서 평점을 가져옵니다.",
     start_date=datetime(2023, 1, 1),
     end_date=datetime(2023, 1, 10),
     schedule=CronDataIntervalTimetable("@daily", "UTC"),
@@ -89,7 +89,7 @@ with DAG(
 
         logger.info(f"Writing ratings to {output_path}")
 
-        # Make sure output directory exists.
+        # 출력 디렉터리가 있는지 확인한다.
         output_dir = os.path.dirname(output_path)
         os.makedirs(output_dir, exist_ok=True)
 
@@ -113,7 +113,7 @@ with DAG(
         ratings = pd.read_json(input_path)
         ranking = rank_movies_by_rating(ratings, min_ratings=min_ratings)
 
-        # Make sure output directory exists.
+        # 출력 디렉터리가 있는지 확인한다.
         output_dir = os.path.dirname(output_path)
         os.makedirs(output_dir, exist_ok=True)
 
