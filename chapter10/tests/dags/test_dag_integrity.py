@@ -1,4 +1,4 @@
-"""Test integrity of DAGs."""
+"""DAG의 무결성을 검사한다."""
 
 import glob
 import os
@@ -14,7 +14,7 @@ DAG_FILES = glob.glob(DAG_PATH, recursive=True)
 
 @pytest.mark.parametrize("dag_file", DAG_FILES)
 def test_dag_integrity(dag_file, caplog):
-    """Test integrity of DAGs."""
+    """DAG의 무결성을 검사한다."""
     DagBag(dag_folder=dag_file, include_examples=False)
     for record in caplog.records:
         if record.levelname == "ERROR":

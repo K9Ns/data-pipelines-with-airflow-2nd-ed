@@ -12,19 +12,19 @@ class Connection:
 
 class MovielensHook(BaseHook):
     """
-    Hook for the MovieLens API.
+    MovieLens API용 훅.
 
-    Abstracts details of the Movielens (REST) API and provides several convenience
-    methods for fetching data (e.g. ratings, users, movies) from the API. Also
-    provides support for automatic retries of failed requests, transparent
-    handling of pagination, authentication, etc.
+    Movielens (REST) API의 세부 사항을 추상화하고, API에서 데이터(평점, 사용자,
+
+    영화 등)를 가져오는 여러 편의 메서드를 제공한다. 실패한 요청의 자동 재시도,
+
+    페이지네이션·인증의 투명한 처리 등도 지원한다.
 
     Parameters
     ----------
     conn_id : str
-        ID of the connection to use to connect to the Movielens API. Connection
-        is expected to include authentication details (login/password) and the
-        host that is serving the API.
+        Movielens API에 연결할 때 사용할 연결의 ID. 연결에는 인증 정보
+        (login/password)와 API를 제공하는 호스트가 들어 있어야 한다.
     """
 
     DEFAULT_SCHEMA = "http"
@@ -46,12 +46,12 @@ class MovielensHook(BaseHook):
 
     def get_conn(self):
         """
-        Returns the connection used by the hook for querying data.
-        Should in principle not be used directly.
+        훅이 데이터 조회에 사용하는 연결을 반환한다.
+        원칙적으로 직접 사용할 일은 없어야 한다.
         """
 
         if self._session is None:
-            # Fetch config for the given connection (host, login, etc).
+            # 주어진 연결의 구성(host, login 등)을 가져온다.
             config = self.get_connection(self._conn_id)
 
             if not config.host:
@@ -62,8 +62,7 @@ class MovielensHook(BaseHook):
 
             self._base_url = f"{schema}://{config.host}:{port}"
 
-            # Build our session instance, which we will use for any
-            # requests to the API.
+            # API로 보내는 모든 요청에 사용할 세션 인스턴스를 만든다.
             self._session = requests.Session()
 
             if config.login:
@@ -72,20 +71,20 @@ class MovielensHook(BaseHook):
         return Connection(session=self._session, base_url=self._base_url)
 
     def close(self):
-        """Closes any active session."""
+        """활성 세션이 있으면 닫는다."""
         if self._session:
             self._session.close()
         self._session = None
         self._base_url = None
 
-    # API methods:
+    # API 메서드:
 
     def get_movies(self):
-        """Fetches a list of movies."""
+        """영화 목록을 가져온다."""
         raise NotImplementedError()
 
     def get_users(self):
-        """Fetches a list of users."""
+        """사용자 목록을 가져온다."""
         raise NotImplementedError()
 
     def get_ratings(
@@ -95,19 +94,19 @@ class MovielensHook(BaseHook):
         batch_size:int=100
     ) -> Generator[Dict[str, Any], None, None]:
         """
-        Fetches ratings between the given start/end date.
+        주어진 시작/종료 날짜 사이의 평점을 가져온다.
 
         Parameters
         ----------
         start_date : str
-            Start date to start fetching ratings from (inclusive). Expected
-            format is YYYY-MM-DD (equal to Airflow's ds formats).
+            평점을 가져오기 시작할 시작 날짜(포함). 기대 형식은
+            YYYY-MM-DD(Airflow의 ds 형식과 동일).
         end_date : str
-            End date to fetching ratings up to (exclusive). Expected
-            format is YYYY-MM-DD (equal to Airflow's ds formats).
+            평점을 가져올 종료 날짜(제외). 기대 형식은
+            YYYY-MM-DD(Airflow의 ds 형식과 동일).
         batch_size : int
-            Size of the batches (pages) to fetch from the API. Larger values
-            mean less requests, but more data transferred per request.
+            API에서 가져올 배치(페이지) 크기. 값이 클수록 요청 수는 줄지만
+            요청당 전송되는 데이터는 많아진다.
         """
 
         yield from self._get_with_pagination(
@@ -123,8 +122,8 @@ class MovielensHook(BaseHook):
         batch_size:int=100
     ) -> Generator[Dict[str, Any], None, None]:
         """
-        Fetches records using a get request with given url/params,
-        taking pagination into account.
+        주어진 url/params로 get 요청을 보내 레코드를 가져온다.
+        페이지네이션을 고려한다.
         """
 
         connection = self.get_conn()
