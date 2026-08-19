@@ -16,8 +16,8 @@ REGION_NAME=os.environ.get('AWS_REGION')
 @app.route("/", methods=["POST"], content_types=["image/jpeg"])
 def predict():
     """
-    Provide this endpoint an image in jpeg format.
-    The image should be equal in size to the training images (28x28).
+    이 엔드포인트에 jpeg 형식 이미지를 보낸다.
+    이미지는 학습 이미지와 같은 크기(28x28)여야 한다.
     """
     img = Image.open(BytesIO(app.current_request.raw_body)).convert("L")  #A
     img_arr = np.array(img, dtype=np.float32)                             #A
