@@ -14,7 +14,7 @@ def _get_event(triggering_asset_events, uri):
 
 
 def _calculate_stats(input_paths, output_path):
-    """Calculates event statistics."""
+    """이벤트 통계를 계산한다."""
     events = pd.concat(
         pd.read_json(input_path, convert_dates=["timestamp"], lines=True) for input_path in input_paths
     )
