@@ -67,4 +67,4 @@ AIRFLOW_IMAGE_NAME=apache/airflow:3.3.1 docker compose up --build
 
 ## 라이선스와 저작자 표시
 
-이 저장소의 코드 저작권은 원서 저자들과 원본 저장소([godatadriven](https://github.com/godatadriven))에 있습니다. 원본 저장소의 `LICENSE` 파일은 현재 비어 있으며, 이 저장소는 원본의 라이선스 방침을 그대로 따릅니다. 한국어판 관련 추가분(README 등)만 이 저장소에서 관리합니다.
+이 저장소의 코드 저작권은 원서 저자들과 원본 저장소([godatadriven](https://github.com/godatadriven))에 있습니다. 이 저장소는 원본의 라이선스 방침을 그대로 따릅니다. 한국어판 관련 추가분(README 등)만 이 저장소에서 관리합니다.
