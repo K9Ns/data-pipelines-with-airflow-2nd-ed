@@ -1,4 +1,4 @@
-# chapter06 (번역서 5장)
+# chapter05 (번역서 5장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 5장의 예제 코드입니다.
 

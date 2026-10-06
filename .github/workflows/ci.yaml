@@ -26,7 +26,7 @@ jobs:
         run: pip install flake8
       - name: Run Flake8
         run: flake8
-        working-directory: chapter10/dags
+        working-directory: chapter09/dags
 
 #      - name: Install Pylint
 #        run: pip install pylint
@@ -38,11 +38,11 @@ jobs:
         run: pip install black
       - name: Run Black
         run: find . -name "*.py" | xargs black --check
-        working-directory: chapter10/dags
+        working-directory: chapter09/dags
 
       - name: Test DAG integrity
         run: pytest tests/
-        working-directory: chapter10/
+        working-directory: chapter09/
 
   shellcheck:
     runs-on: ubuntu-latest
@@ -64,25 +64,25 @@ jobs:
           - chapter01
           - chapter02
           - chapter03
-          # - chapter04
+          # - chapter03-data-aware
+          - chapter04
           - chapter05
-          - chapter06
-          # - chapter07 # Temporary ignore since sensors are not triggered and ci run will never finish
-          # - chapter08
-          - chapter09
-          # - chapter10
-          # - chapter11/docker # No docker available
-          # - chapter11/kubernetes # Pre setup steps needed
+          # - chapter06 # Temporary ignore since sensors are not triggered and ci run will never finish
+          # - chapter07
+          - chapter08
+          # - chapter09
+          # - chapter10/docker # No docker available
+          # - chapter10/kubernetes # Pre setup steps needed
+          - chapter11
           - chapter12
-          - chapter13
-          # - chapter14 # No env file available with full settings
-          # - chapter15 # Dags contain failures on purpose
-          # - chapter16/01-rbac # No default user airflow available
-          - chapter16/02-webserver-theme
-          - chapter16/03-ldap
-          - chapter16/04-ssl
-          # - chapter16/05-secretsbackend # No default value for secure_api connection
-          # - chapter17
+          # - chapter13 # No env file available with full settings
+          # - chapter14 # Dags contain failures on purpose
+          # - extra-security/01-rbac # No default user airflow available
+          - extra-security/02-webserver-theme
+          - extra-security/03-ldap
+          - extra-security/04-ssl
+          # - extra-security/05-secretsbackend # No default value for secure_api connection
+          # - extra-kubernetes
     #     airflow_version: ["3.0.6"]
     # env:
     #   AIRFLOW_VERSION: ${{ matrix.airflow_version }}

@@ -1,4 +1,4 @@
-# chapter12 (번역서 11장)
+# chapter11 (번역서 11장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 11장의 예제 코드입니다.
 

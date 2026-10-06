@@ -1,4 +1,4 @@
-# chapter13 (번역서 12장)
+# chapter12 (번역서 12장)
 
 『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 12장의 예제 코드입니다.
 

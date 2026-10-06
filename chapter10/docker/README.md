@@ -1,4 +1,4 @@
-# chapter11 - Docker (번역서 10장)
+# chapter10 - Docker (번역서 10장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 10장의 Docker 부분 예제 코드입니다.
 

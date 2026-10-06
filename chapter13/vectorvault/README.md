@@ -42,5 +42,5 @@ Dockerfile.chat 용
 docker build -t chat -f Dockerfile.chat .
 
 
-docker run --env-file ~/.env -p 8084:8084 --network=chapter14_default chat
+docker run --env-file ~/.env -p 8084:8084 --network=chapter13_default chat
 ```

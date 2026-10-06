@@ -1,4 +1,4 @@
-# chapter05 (번역서 4장)
+# chapter04 (번역서 4장)
 
 『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 4장의 예제 코드입니다.
 

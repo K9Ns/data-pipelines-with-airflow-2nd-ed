@@ -1,4 +1,4 @@
-# chapter08 (번역서 7장)
+# chapter07 (번역서 7장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 7장의 예제 코드입니다.
 

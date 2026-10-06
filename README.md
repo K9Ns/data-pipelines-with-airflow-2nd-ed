@@ -10,7 +10,10 @@ Manning 도서 [Data Pipelines with Apache Airflow, Second Edition](https://www.
 ## 구조
 
 ```
-├── chapter01 ~ chapter17    # 장별 예제 코드
+├── chapter01 ~ chapter14    # 번역서 1~14장의 예제 코드
+├── chapter03-data-aware     # 3장 데이터 인지 스케줄링 절의 예제 코드
+├── extra-security           # 번역서에 없는 보안 장의 예제 코드
+├── extra-kubernetes         # 번역서에 없는 Kubernetes 배포 장의 예제 코드
 ├── official-airflow-docker-compose.yml
 ├── validate-dag-runs.sh     # CI 용 DAG 실행 검증 스크립트
 ├── pyproject.toml           # 루트 개발 환경 (poetry)
@@ -27,7 +30,7 @@ Manning 도서 [Data Pipelines with Apache Airflow, Second Edition](https://www.
 └── README.md                # 장 특화 안내 (있는 경우)
 ```
 
-> **장 번호 매핑 주의.** 이 저장소의 chapter 디렉터리 번호는 원서 최종판 기준이라, 번역 원고(MEAP v15, 1~14장+부록 A)의 장 번호와 어긋나는 구간이 있습니다. 예를 들어 원고 13장(생성형 AI 프로젝트)의 코드는 `chapter14/`에 있습니다. 각 장 README의 제목에 대응하는 번역서 장 번호를 적어 두었습니다.
+> **장 번호 안내.** 장 디렉터리 번호는 번역서(MEAP v15, 1~14장과 부록 A)의 장 번호와 같습니다. 원본 저장소는 원서 최종판의 번호를 따르므로 디렉터리 이름이 다릅니다. 원본의 `chapter04`는 이 저장소의 `chapter03-data-aware`, `chapter05`~`chapter15`는 `chapter04`~`chapter14`, `chapter16`과 `chapter17`은 `extra-security`와 `extra-kubernetes`입니다. 원본의 변경을 가져올 때는 이 대응에 맞춰 경로를 옮겨야 합니다.
 
 한국어판 독자를 위해 예제 코드의 주석·독스트링·DAG 설명 문자열과 장별 README를 한국어로 옮겼습니다. 코드 동작은 원본과 같고, 라이선스 문구와 상류 공용 파일(`official-airflow-docker-compose.yml`, `webserver_config.py` 템플릿)은 원문을 유지합니다.
 
@@ -54,7 +57,7 @@ AIRFLOW_IMAGE_NAME=apache/airflow:3.3.1 docker compose up --build
 
 ## Airflow 3.3.1 검증
 
-검증 시점(2026-08-20)의 최신 안정 버전인 Airflow 3.3.1을 기준으로 전 장의 DAG 임포트 검사, chapter10 pytest, chapter01 통합 실행을 확인하고, 제거 API·템플릿 변수·구성 키를 훑는 정적 검토를 한 차례 더 거쳤습니다. 호환되지 않는 예제는 발견되지 않았습니다. 세부 결과와 재현 방법은 [docs/airflow-3.3.1-verification.md](docs/airflow-3.3.1-verification.md)를 참고하세요.
+검증 시점(2026-08-20)의 최신 안정 버전인 Airflow 3.3.1을 기준으로 전 장의 DAG 임포트 검사, chapter09 pytest, chapter01 통합 실행을 확인하고, 제거 API·템플릿 변수·구성 키를 훑는 정적 검토를 한 차례 더 거쳤습니다. 호환되지 않는 예제는 발견되지 않았습니다. 세부 결과와 재현 방법은 [docs/airflow-3.3.1-verification.md](docs/airflow-3.3.1-verification.md)를 참고하세요.
 
 ## DAG 실행 검증 (CI)
 

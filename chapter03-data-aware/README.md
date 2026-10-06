@@ -1,4 +1,4 @@
-# chapter04 (데이터 인지 스케줄링)
+# chapter03-data-aware (데이터 인지 스케줄링)
 
 『Data Pipelines with Apache Airflow, Second Edition』의 데이터 인지 스케줄링 예제 코드입니다. 원서 최종판에서 신설된 장으로, 번역서 기준으로는 3장의 데이터 인지 스케줄링 절에 해당합니다.
 

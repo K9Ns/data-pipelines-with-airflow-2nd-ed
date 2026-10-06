@@ -1,9 +1,9 @@
-# chapter14 (번역서 13장) 실행 안내
+# chapter13 (번역서 13장) 실행 안내
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 13장(생성형 AI 프로젝트)의 예제 코드입니다.
 
 0) 프로젝트 디렉터리로 이동합니다.
-    `cd chapter14`
+    `cd chapter13`
 
 1) Docker Compose 파일을 실행합니다.
     `docker compose up -d`

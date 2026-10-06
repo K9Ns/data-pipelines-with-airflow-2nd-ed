@@ -21,7 +21,7 @@ COLLECTION_NAME = "recipes"
 
 common_dag_args = {
     "image":"vectorvault_cli:latest",
-    "network_mode":"chapter14_default",
+    "network_mode":"chapter13_default",
     "environment":ENVIRONMENT,
     "auto_remove":"success",
     "tty":True,

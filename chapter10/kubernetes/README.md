@@ -1,4 +1,4 @@
-# chapter11 - Kubernetes (번역서 10장)
+# chapter10 - Kubernetes (번역서 10장)
 
 『Data Pipelines with Apache Airflow, Second Edition』 번역서 10장의 Kubernetes 부분 예제 코드입니다.
 

@@ -1,4 +1,4 @@
-# chapter07 (번역서 6장)
+# chapter06 (번역서 6장)
 
 『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 6장의 예제 코드입니다.
 
@@ -26,7 +26,7 @@ docker compose down -v
 
 1. api server 컨테이너에 접속합니다.
    ```bash
-   docker exec -it chapter07-api-server-1 /bin/bash
+   docker exec -it chapter06-api-server-1 /bin/bash
    ```
 2. 데이터 디렉터리를 만듭니다.
     ```bash
@@ -54,7 +54,7 @@ Kafka 예제 DAG를 실행하려면 다음을 따릅니다.
 1. DAG를 켭니다.
 2. Kafka 컨테이너에 접속합니다.
    ```bash
-   docker exec -it chapter07-kafka-1 /bin/bash
+   docker exec -it chapter06-kafka-1 /bin/bash
    ```
 3. CLI 프로듀서를 실행합니다.
    ```bash

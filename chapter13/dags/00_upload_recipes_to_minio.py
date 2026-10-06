@@ -15,7 +15,7 @@ with DAG(
         task_id="upload_recipes_to_minio",
         command="upload {{data_interval_start | ds}}",
         image="vectorvault_cli:latest",
-        network_mode="chapter14_default",
+        network_mode="chapter13_default",
         environment={
                 "AWS_ENDPOINT_URL_S3":"{{ conn.minio.extra_dejson.get('endpoint_url') }}",
                 "AWS_ACCESS_KEY_ID": "{{ conn.minio.login }}",
