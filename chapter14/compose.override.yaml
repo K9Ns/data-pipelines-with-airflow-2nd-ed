@@ -1,20 +1,56 @@
-x-airflow-common: &airflow-common
+# NOTE
+# This docker-compose override is slightly different than most of the other chapters. The main difference is that
+# we use a custom Dockerfile and image for a number of components, which required the edge3 provider to be available
+# at startup. Installing the edge3 provider package is done in the Dockerfile.edge file. Unfortunately, installing
+# via the usual approach of adding it to the _PIP_ADDITIONAL_REQUIREMENTS_ environment variable does not work as
+# the package is then either installed after the work has been done (in the case of Airflow init) or is not available
+# yet when the Airflow component starts. This latter one could be circumvented by overriding the entrypoint, but
+# for the sake of consistency, we opted to use the same custom Dockerfile for all affected components.
+
+# This environment contains both a Celery Executor worker and an Edge Executor worker. This is to demonstrate
+# the Edge Executor in action (although it being in the same environment as the other Airflow components kind of
+# defeats the purpose ;-).
+
+x-airflow-common:
+  &airflow-common
   environment:
-    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
-    AIRFLOW__CORE__TEST_CONNECTION: "Enabled"
-    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL: 60
+    AIRFLOW__CORE__EXECUTOR: 'CeleryExecutor,airflow.providers.edge3.executors.EdgeExecutor'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
+    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL : 60
+    AIRFLOW__METRICS__STATSD_ON: 'true'
+    AIRFLOW__METRICS__STATSD_HOST: 'statsd_exporter'
+    AIRFLOW__METRICS__STATSD_PORT: 9125
+    AIRFLOW__METRICS__STATSD_PREFIX: 'airflow'
     AIRFLOW__API_AUTH__JWT_SECRET: foo
     AIRFLOW__API__SECRET_KEY: bar
-    AIRFLOW_CONN_MINIO: aws://${AWS_ACCESS_KEY_ID}:${AWS_SECRET_ACCESS_KEY}@?endpoint_url=http%3A%2F%2Fminio%3A${MINIO_API_PORT}
-    AIRFLOW_CONN_WEAVIATE_DEFAULT: '{ "conn_type": "weaviate", "host": "weaviate", "port": "${WEAVIATE_HOST_PORT_REST}", "extra": { "OPENAI_CONN_TYPE":"${OPENAI_CONN_TYPE}",  "grpc_host": "weaviate", "grpc_port": "${WEAVIATE_HOST_PORT_GRPC}","additional_headers" : { "OPENAI_API_KEY": "${AZURE_OPENAI_API_KEY}","AZURE_OPENAI_RESOURCE_NAME": "${AZURE_OPENAI_RESOURCE_NAME}","AZURE_OPENAI_ENDPOINT": "${AZURE_OPENAI_ENDPOINT}"}}}'
+    AIRFLOW__EDGE__API_URL: 'http://airflow-apiserver:8080/edge_worker/v1/rpcapi'
+    AIRFLOW__EDGE__API_ENABLED: "true"
+    AIRFLOW__CORE__INTERNAL_API_SECRET_KEY: foo
+    AIRFLOW__SMTP__SMTP_HOST: "smtp-server"
+    AIRFLOW__SMTP__SMTP_MAIL_FROM: "daniel@vdende.com"
+    AIRFLOW__SMTP__SMTP_PORT: 2525
+    AIRFLOW__SMTP__SMTP_SSL: False
+    AIRFLOW__SMTP__SMTP_STARTTLS: False
+    AIRFLOW_CONN_SMTP_DEFAULT: '{
+      "conn_type": "smtp",
+      "login":"airflow_smtp_user",
+      "password":"airflow_smtp_passw0rd"
+    }'
+
+
+    # Dag specific connection setup
+    AIRFLOW_CONN_MOVIELENS: http://airflow:airflow@movielens
+    MOVIELENS_USER: airflow
+    MOVIELENS_PASSWORD: airflow
   volumes:
     - airflow-data-volume:/data
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-  networks:
-    - default
 
 services:
   airflow-apiserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.edge
     <<: *airflow-common
 
   airflow-scheduler:
@@ -27,6 +63,9 @@ services:
     <<: *airflow-common
 
   airflow-init:
+    build:
+      context: .
+      dockerfile: Dockerfile.edge
     <<: *airflow-common
 
   airflow-cli:
@@ -35,99 +74,89 @@ services:
   airflow-dag-processor:
     <<: *airflow-common
 
-  weaviate:
-    image: cr.weaviate.io/semitechnologies/weaviate:1.27.0
-    restart: on-failure:0
-    ports:
-     - ${WEAVIATE_HOST_PORT_REST}:${WEAVIATE_HOST_PORT_REST}
-     - ${WEAVIATE_HOST_PORT_GRPC}:${WEAVIATE_HOST_PORT_GRPC}
-    environment:
-      QUERY_DEFAULTS_LIMIT: 25
-      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
-      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
-      CLUSTER_HOSTNAME: 'node1'
-      BACKUP_FILESYSTEM_PATH: '/var/lib/weaviate/backup'
-      ENABLE_API_BASED_MODULES: 'true'
-    command:
-      - --host
-      - 0.0.0.0
-      - --port
-      - ${WEAVIATE_HOST_PORT_REST}
-      - --scheme
-      - http
+  airflow-edge-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.edge
+    <<: *airflow-common
+    command: edge worker
+    restart: always
     volumes:
-      - weaviate_data:/var/lib/weaviate
-
-  vectorvault_cli:
-    build: 
-      context: ./vectorvault
-      dockerfile: Dockerfile.cli
-    image: vectorvault_cli:latest
-    environment:
-      - AWS_ENDPOINT_URL_S3="http://localhost:${MINIO_API_PORT}"
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - OPENAI_CONN_TYPE=${OPENAI_CONN_TYPE}
-
-
-  vectorvault_chat:
-    build: 
-      context: ./vectorvault
-      dockerfile: Dockerfile.chat
-    image: vectorvault_chat:latest
-    ports:
-      - "${STREAMLIT_HOST_PORT}:${STREAMLIT_HOST_PORT}"
-    environment:
-      - AWS_ENDPOINT_URL_S3="http://localhost:${MINIO_API_PORT}"
-      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-      - WEAVIATE_HOST_PORT_REST=${WEAVIATE_HOST_PORT_REST}
-      - WEAVIATE_HOST_PORT_GRPC=${WEAVIATE_HOST_PORT_GRPC}
-      - OPENAI_API_KEY=${AZURE_OPENAI_API_KEY}
-      - AZURE_OPENAI_RESOURCE_NAME=${AZURE_OPENAI_RESOURCE_NAME}
-      - AZURE_OPENAI_ENDPOINT=${AZURE_OPENAI_ENDPOINT}
-      - OPENAI_CONN_TYPE=${OPENAI_CONN_TYPE}
-      - STREAMLIT_HOST_PORT=${STREAMLIT_HOST_PORT}
-
-
-  minio:
-    image: minio/minio:RELEASE.2024-10-13T13-34-11Z
-    volumes:
-      - minio:/data
-    ports:
-      - "${MINIO_API_PORT}:${MINIO_API_PORT}"
-      - "${MINIO_UI_PORT}:${MINIO_UI_PORT}"
-    command: server /data --address :${MINIO_API_PORT} --console-address ":${MINIO_UI_PORT}"
-    environment:
-      MINIO_ROOT_USER: airflow
-      MINIO_ROOT_PASSWORD: apacheairflow
-
-  minio_init:
-    image: minio/minio:RELEASE.2024-10-13T13-34-11Z
+      - ${AIRFLOW_PROJ_DIR:-.}/dags:/opt/airflow/dags  # needed for the Edge executor to be able to access the dags
     depends_on:
-      - minio
-    entrypoint: >
-      /bin/sh -c "
-      while ! /usr/bin/mc config host add minio http://minio:${MINIO_API_PORT} airflow apacheairflow; do echo 'MinIO not up and running yet...' && sleep 1; done;
-      echo 'Added mc host config.';
-      /usr/bin/mc mb minio/data || true;
-      /usr/bin/mc admin user add minio ${AWS_ACCESS_KEY_ID} ${AWS_SECRET_ACCESS_KEY};
-      /usr/bin/mc admin policy attach minio readwrite --user ${AWS_ACCESS_KEY_ID};
-      echo 'Created access key: ${AWS_ACCESS_KEY_ID}';
-      exit 0;
-      "
-    restart: "on-failure"
+      airflow-apiserver:
+        condition: service_healthy
 
-networks:
-  default:
-    driver: bridge
-  minionetwork:
-    driver: bridge
+  statsd_exporter:
+    image: prom/statsd-exporter:v0.28.0
+    restart: always
+    volumes:
+      - ./files/statsd_mapping.yml:/tmp/statsd_mapping.yml
+    ports:
+      - "9102:9102"
+      - "9125:9125/udp"
+    command: --statsd.mapping-config=/tmp/statsd_mapping.yml
+
+  prometheus:
+    image: prom/prometheus:v3.1.0
+    restart: always
+    volumes:
+      - ./files/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    command:
+      - --web.enable-admin-api
+      - --web.enable-lifecycle
+      # Flags below are defaults, but must be added explicitly, otherwise would be overridden by flags above
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --web.console.libraries=/usr/share/prometheus/console_libraries
+      - --web.console.templates=/usr/share/prometheus/consoles
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    restart: always
+    ports:
+      - "3000:3000"
+
+  redis_exporter:
+    image: oliver006/redis_exporter:v1.67.0-alpine
+    ports:
+      - "9121:9121"
+    command: --redis.addr=redis://redis:6379
+
+  airflow-data:
+    build:
+      context: .
+      dockerfile: Dockerfile.edge
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    # yamllint disable rule:line-length
+    command:
+      - -c
+      - |
+        if [[ -z "${AIRFLOW_UID}" ]]; then
+          echo
+          echo -e "\033[1;33mWARNING!!!: AIRFLOW_UID not set!\e[0m"
+          echo "If you are on Linux, you SHOULD follow the instructions below to set "
+          echo "AIRFLOW_UID environment variable, otherwise files will be owned by root."
+          echo "For other operating systems you can get rid of the warning with manually created .env file:"
+          echo "    See: https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html#setting-the-right-airflow-user"
+          echo
+        fi
+        chown -R "${AIRFLOW_UID}:0" /data
+        exec /entrypoint airflow version
+    # yamllint enable rule:line-length
+    user: "0:0"
+
+  smtp-server:
+    image: maildev/maildev:2.0.5
+    command: [ "bin/maildev", "--web", "1080", "--smtp", "2525", "--incoming-user", "airflow_smtp_user", "--incoming-pass", "airflow_smtp_passw0rd" ]
+    hostname: smtp-server
+    domainname: airflow.local.io
+    ports:
+      - 1080:1080
+      - 2525:2525
 
 volumes:
   airflow-data-volume:
-  minio_data:
-    driver: local
-  minio:
-  weaviate_data:
-    driver: local
