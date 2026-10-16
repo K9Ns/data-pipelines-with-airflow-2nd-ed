@@ -1,6 +1,6 @@
 """
-리스트: 5.3, 5.4, 5.5, 5.6
-그림: 5.3
+리스트: 6.3, 6.4, 6.5, 6.6
+그림: 6.3
 """
 import pendulum
 from airflow.providers.standard.operators.empty import EmptyOperator

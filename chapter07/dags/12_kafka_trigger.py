@@ -1,5 +1,6 @@
 """
-    그림: 6.5
+    리스트: 7.9, 7.10, 7.11, 7.12
+    그림: 7.12
 """
 
 from airflow.sdk import DAG, AssetWatcher, Asset
