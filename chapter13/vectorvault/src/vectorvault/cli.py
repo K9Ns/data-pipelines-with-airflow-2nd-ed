@@ -183,7 +183,7 @@ def save(collection_name:str, path: str) -> None:
                 failed_objects = failed_objects.append(collection.batch.failed_objects)
 
         if len(failed_objects) > 0:
-            raise ValueError("Failed to save {len(failed_objects)} objects.")
+            raise ValueError(f"Failed to save {len(failed_objects)} objects.")
 
 
 if __name__ == "__main__":
