@@ -1,6 +1,6 @@
-# chapter07 (번역서 7장)
+# chapter08 (번역서 8장)
 
-『Data Pipelines with Apache Airflow, Second Edition』 번역서 7장의 예제 코드입니다.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 8장의 예제 코드입니다.
 
 ## 구성
 

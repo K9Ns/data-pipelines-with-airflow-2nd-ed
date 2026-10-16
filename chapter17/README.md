@@ -1,6 +1,6 @@
-# extra-kubernetes (Kubernetes에 Airflow 배포)
+# chapter17 (번역서 17장)
 
-『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』의 배포 장(원서 최종판 기준, 번역 원고 MEAP v15에는 미수록) 예제 코드입니다.
+『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 17장(Kubernetes에 Airflow 배포)의 예제 코드입니다.
 
 이 장은 Kubernetes에 Airflow를 배포하는 여러 방법을 설명합니다. 배포 명령을 실행할 수 있도록, 이 장의 `docker-compose.yml` 에 Docker Compose 기반 Kubernetes 클러스터가 마련되어 있습니다. 다음 명령으로 클러스터를 시작합니다.
 
@@ -17,7 +17,7 @@ docker compose up -d
 Kubernetes 클러스터를 다루도록 `kubectl` 과 `helm` 명령을 실행하는 별도 컨테이너가 있습니다. 이 컨테이너는 이른바 login shell로 시작하는 것이 중요합니다. k8s 서버에 접속하는 --server 명령줄 옵션을 채워 주는 `kubectl` 별칭이 필요하기 때문입니다.
 
 ```bash
-docker exec -ti extra-kubernetes-k3s-cli-1 /bin/bash -l
+docker exec -ti chapter17-k3s-cli-1 /bin/bash -l
 ```
 
 #### 대안: k9s 또는 로컬 kubectl

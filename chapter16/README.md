@@ -1,6 +1,6 @@
-# extra-security (Airflow 보안)
+# chapter16 (번역서 16장)
 
-『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』의 보안 장(원서 최종판 기준, 번역 원고 MEAP v15에는 미수록) 예제 코드입니다.
+『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 16장(Airflow 보안)의 예제 코드입니다.
 
 ## 구성
 

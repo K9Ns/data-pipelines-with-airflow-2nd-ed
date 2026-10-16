@@ -1,6 +1,6 @@
-# chapter11 (번역서 11장)
+# chapter12 (번역서 12장)
 
-『Data Pipelines with Apache Airflow, Second Edition』 번역서 11장의 예제 코드입니다.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 12장의 예제 코드입니다.
 
 ## 구성
 

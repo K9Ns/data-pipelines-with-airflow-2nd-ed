@@ -9,7 +9,7 @@ from custom.hooks import MovielensHook
 
 class MovielensFetchRatingsOperator(BaseOperator):
     """
-    Movielens API에서 평점을 가져오는 오퍼레이터(8장에서 소개).
+    Movielens API에서 평점을 가져오는 오퍼레이터(9장에서 소개).
 
     Parameters
     ----------

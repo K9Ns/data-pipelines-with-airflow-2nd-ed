@@ -1,6 +1,6 @@
-# chapter09 (번역서 9장)
+# chapter10 (번역서 10장)
 
-『Data Pipelines with Apache Airflow, Second Edition』 번역서 9장의 예제 코드입니다.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 10장의 예제 코드입니다.
 
 ## 구성
 
@@ -14,7 +14,7 @@
 
 이 DAG들은 UI에서 실행하라고 있는 것이 아니라(일부러 실패하는 것도 있습니다) 테스트 사용법을 보여 주기 위한 것입니다. 그래서 UI에 오류가 표시되지 않도록 `.airflowignore` 파일에 명시적으로 추가되어 있습니다.
 
-`dags/custom` 디렉터리에는 8장에서 소개한 커스텀 훅과 오퍼레이터 여럿이 들어 있습니다. 이를 재료로 (커스텀) 오퍼레이터의 테스트 작성법을 보여 줍니다. 테스트는 `tests` 디렉터리에 있습니다.
+`dags/custom` 디렉터리에는 9장에서 소개한 커스텀 훅과 오퍼레이터 여럿이 들어 있습니다. 이를 재료로 (커스텀) 오퍼레이터의 테스트 작성법을 보여 줍니다. 테스트는 `tests` 디렉터리에 있습니다.
 
 ## 사용법
 

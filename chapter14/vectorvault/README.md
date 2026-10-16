@@ -9,19 +9,19 @@ docker build -t cli -f Dockerfile.cli .
 MinIO에 파일 업로드
 
 ```bash
-docker run --env-file ~/.env --network=chapter13_default cli upload "2024-10-01"
+docker run --env-file ~/.env --network=chapter14_default cli upload "2024-10-01"
 ```
 
 파일 비교
 
 ```bash
-docker run --env-file ~/.env --network=chapter13_default cli compare "s3://data/2024-10-05" "recipes"
+docker run --env-file ~/.env --network=chapter14_default cli compare "s3://data/2024-10-05" "recipes"
 ```
 
 파일 전처리
 
 ```bash
-docker run --env-file ~/.env --network=chapter13_default cli create "recipes"  "text-embedding-3-large"
+docker run --env-file ~/.env --network=chapter14_default cli create "recipes"  "text-embedding-3-large"
 ```
 
 파일 전처리
@@ -42,5 +42,5 @@ Dockerfile.chat 용
 docker build -t chat -f Dockerfile.chat .
 
 
-docker run --env-file ~/.env -p 8084:8084 --network=chapter13_default chat
+docker run --env-file ~/.env -p 8084:8084 --network=chapter14_default chat
 ```

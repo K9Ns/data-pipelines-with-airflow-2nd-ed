@@ -1,6 +1,6 @@
-# chapter05 (번역서 5장)
+# chapter06 (번역서 6장)
 
-『Data Pipelines with Apache Airflow, Second Edition』 번역서 5장의 예제 코드입니다.
+『Data Pipelines with Apache Airflow, Second Edition』 번역서 6장의 예제 코드입니다.
 
 ## 구성
 

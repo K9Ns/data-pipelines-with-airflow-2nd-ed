@@ -1,6 +1,6 @@
-# chapter12 (번역서 12장)
+# chapter13 (번역서 13장)
 
-『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 12장의 예제 코드입니다.
+『[Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow-second-edition)』 번역서 13장의 예제 코드입니다.
 
 이 사용 사례의 상당 부분은 https://toddwschneider.com/posts/taxi-vs-citi-bike-nyc 의 아이디어에 기반합니다. 주어진 시간대와 요일에 NYC의 두 동네 사이에서 가장 빠른 교통수단(Citi Bike 대 옐로 택시)이 무엇인지 판정하는 문제입니다. 이 사용 사례를 Airflow 워크플로로 프로덕션화합니다. 이를 위해 (모의) 실시간 서비스 둘을 만듭니다.
 
