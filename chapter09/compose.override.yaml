@@ -1,12 +1,19 @@
 x-airflow-common:
   &airflow-common
   environment:
-    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL : 60
-    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
-    AIRFLOW__CORE__TEST_CONNECTION: "Enabled"
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__CORE__TEST_CONNECTION: 'Enabled'
+    AIRFLOW__DAG_PROCESSOR__REFRESH_INTERVAL: 60
     AIRFLOW__API_AUTH__JWT_SECRET: foo
     AIRFLOW__API__SECRET_KEY: bar
+    # Dag specific connection setup
+    AIRFLOW_CONN_MOVIELENS: http://airflow:airflow@movielens
+    MOVIELENS_USER: airflow
+    MOVIELENS_PASSWORD: airflow
   volumes:
+    - ./src:/opt/airflow/custom/src
+    - ./setup.py:/opt/airflow/custom/setup.py
+    - build:/opt/airflow/custom/build
     - airflow-data-volume:/data
 
 services:
@@ -32,7 +39,7 @@ services:
     <<: *airflow-common
 
   airflow-data:
-    image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:|version|}
+    image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.10.2}
     <<: *airflow-common
     entrypoint: /bin/bash
     # yamllint disable rule:line-length
@@ -53,5 +60,14 @@ services:
     # yamllint enable rule:line-length
     user: "0:0"
 
+  movielens:
+    build: docker/movielens-api
+    ports:
+      - "8081:8081"
+    environment:
+      API_USER: airflow
+      API_PASSWORD: airflow
+
 volumes:
   airflow-data-volume:
+  build:
